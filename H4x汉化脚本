@@ -1,5 +1,4 @@
 local Translations = {
-   --["H4x Scripts"] = "H4x汉化",
     ["H4x Scripts"] = "H4x汉化",
     ["discord.gg/H4xScripts"] = "○○汉化",
     ["Main"] = "主要",
@@ -233,7 +232,7 @@ local Translations = {
     ["Alpha Wolf Pelt"] = "阿尔法狼皮",
     ["Arctic Fox Pelt"] = "北极狐皮",
     ["Polar Bear Pelt"] = "北极熊皮",
-   ["Mammoth Tusk"] = "猛犸象牙",
+    ["Mammoth Tusk"] = "猛犸象牙",
 }
 
 local function translateText(text)
