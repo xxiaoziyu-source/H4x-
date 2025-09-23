@@ -1,5 +1,5 @@
 local Translations = {
-    ["H4x Scripts"] = "H4x汉化",
+    ["H4x Scripts"] = "H4x",
     ["discord.gg/H4xScripts"] = "○○汉化",
     ["Main"] = "主要", ["Fishing"] = "钓鱼", ["Bring"] = "带来", ["Auto"] = "自动",
     ["Teleport"] = "传送", ["Visuals"] = "视觉", ["Players"] = "玩家", ["Settings"] = "设置",
