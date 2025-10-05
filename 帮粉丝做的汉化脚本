@@ -56,7 +56,7 @@ local Translations = {
 "WalkSpeed": "行走速度",
 "Enable WalkSpeed": "启用行走速度",
 "SprintSpeed": "冲刺速度",
-"Enable Sprint": "启用冲刺"
+"Enable Sprint": "启用冲刺",
 "Survivor ESP": "幸存者透视",
 "Killer ESP": "杀手透视",
 "Ghost ESP": "幽灵透视",
