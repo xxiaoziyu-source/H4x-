@@ -1,0 +1,542 @@
+local Translations = {
+   --["这里填要替换的英文"] = "这里填中文",
+    -- Zenikaze Hub
+    ["Plot Painter"] = "地块绘制器",
+    ["Your plot painted with Zenikaze style!"] = "你的地块已使用Zenikaze风格绘制！",
+    ["Zenikaze Hub"] = "Zenikaze中心",
+    ["Script loaded! Configure keybinds in Config tab"] = "脚本已加载！在设置标签页配置按键绑定",
+    ["Made by ZenithExility"] = "由ZenithExility制作",
+    ["Stealer"] = "窃取功能",
+    ["Helper"] = "辅助功能",
+    ["Config"] = "设置",
+    ["Private"] = "隐私",
+    ["TP Highest"] = "传送至最高处",
+    ["Desync Player"] = "玩家失步",
+    ["Auto Delivery"] = "自动交付",
+    ["3rd Floor"] = "三楼",
+    ["Float V1"] = "悬浮V1",
+    ["Float V2"] = "悬浮V2",
+    ["Semi Invisible"] = "半隐身",
+    ["Steal Best"] = "窃取最优",
+    ["Jump Boost"] = "跳跃增强",
+    ["Speed Control"] = "速度控制",
+    ["Infinity Jump"] = "无限跳跃",
+    ["Aimbot Helper"] = "自瞄辅助",
+    ["ESP Players"] = "玩家透视",
+    ["ESP Brainrot Gods"] = "Brainrot之神透视",
+    ["ESP Brainrot Secrets"] = "Brainrot秘密透视",
+    ["FPS Immune"] = "帧率免疫",
+    ["Base Opacity"] = "基地透明度",
+    ["ESP Base Time"] = "基地时间透视",
+    ["ESP Best"] = "最优透视",
+    ["Fly Grapple"] = "飞行钩爪",
+    ["Rejoin Server"] = "重新加入服务器",
+    ["Server Hop (auto empty)"] = "服务器跳转（自动空服）",
+    ["Job ID"] = "任务ID",
+    ["Enter Job ID..."] = "输入任务ID...",
+    ["Join by Job ID"] = "通过任务ID加入",
+    ["Copy Current Job ID"] = "复制当前任务ID",
+    ["Mobile Keybinds Config"] = "移动端按键配置",
+    ["Join Discord (copy link)"] = "加入Discord（复制链接）",
+    ["Clear Settings"] = "清除设置",
+    ["Protection Status"] = "保护状态",
+    ["Remove Notifications"] = "移除通知",
+    ["FPS Booster"] = "帧率增强器",
+    ["CREDITS"] = "鸣谢",
+    ["ZENIKAZE HUB TEAM"] = "Zenikaze中心团队",
+    ["ZenithExility - Main Developer"] = "ZenithExility - 主开发者",
+    ["LKZ - Co-Developer"] = "LKZ - 联合开发者",
+    ["FaZe - Marketing & Design"] = "FaZe - 营销与设计",
+    ["Maicon - Marketing"] = "Maicon - 营销",
+    ["Mgmfz - Technical Support"] = "Mgmfz - 技术支持",
+    ["Thank you for using Zenikaze Hub!"] = "感谢使用Zenikaze中心！",
+    ["OFF"] = "关闭",
+    
+    -- ViKai HUB / 99 nights
+    ["ViKai HUB"] = "ViKai助手",
+    ["99 nights"] = "99之夜",
+    ["by vinkai"] = "作者: vinkai",
+    ["v0.14 from nazuro.xyz"] = "v0.14 来自 nazuro.xyz",
+    ["Script is still being worked on!"] = "脚本仍在开发中！",
+    ["If you find any bugs or have any suggestions let me know on discord!"] = "如果您发现任何错误或有任何建议，请在Discord上告诉我！",
+    ["AutoFarm"] = "自动农场",
+    ["AutoFarm Chest"] = "自动开启宝箱",
+    ["Infinite Range"] = "无限范围",
+    ["Auto Prompt"] = "自动提示",
+    ["AutoChop Tree"] = "自动砍树",
+    ["Chop Aura"] = "砍伐光环",
+    ["Small Trees"] = "小树",
+    ["Range"] = "范围",
+    ["Auto shred Wood"] = "自动粉碎木材",
+    ["Character Settings"] = "角色设置",
+    ["Walk Speed"] = "移动速度",
+    ["Jump Power"] = "跳跃力量",
+    ["Weapon Utilities"] = "武器工具",
+    ["Auto Resize Weapon"] = "自动重设武器大小",
+    ["Weapon Size"] = "武器尺寸",
+    ["Items"] = "物品",
+    ["Bring Items"] = "物品携带",
+    ["Junk"] = "废品",
+    ["Fuel"] = "燃料",
+    ["Food"] = "食物",
+    ["杀戮光环"] = "杀戮光环",
+    ["Meteor Aura"] = "流星灵气",
+    ["ESP"] = "透视功能",
+    ["Tree Health ESP"] = "树木生命值透视",
+    ["Meteor ESP"] = "流星透视",
+    ["Auto Eat"] = "自动进食",
+    ["Hunger %"] = "饥饿度百分比",
+    ["Select Food"] = "选择食物",
+    ["Own All Gamepass"] = "获得所有游戏通行证",
+    
+    -- Chilli Hub
+    ["Steal a Brainot"] = "窃取Brainrot",
+    ["Chilli Hub"] = "辣椒助手",
+    ["Auto Buy Item"] = "自动购买物品",
+    ["Farm"] = "农场功能",
+    ["Min money per sec to buy"] = "每秒最低购买金额",
+    ["Auto buy Brainrot"] = "自动购买Brainrot",
+    ["Buy Brainrot"] = "购买Brainrot",
+    ["Anti AFK"] = "防挂机",
+    ["Auto Lock Base"] = "自动锁定基地",
+    ["Auto Collect"] = "自动收集",
+    ["Collect Delay (minutes)"] = "收集延迟(分钟)",
+    ["Invisible (V keybind)"] = "隐形(V键绑定)",
+    ["Steal Upstairs (Y keybind)"] = "上楼偷窃(Y键绑定)",
+    ["Auto Steal"] = "自动偷窃",
+    ["Auto Steal Nearest Brainrot"] = "自动偷窃最近Brainrot",
+    ["Auto kick on steal"] = "偷窃时自动踢出",
+    ["Float (Patched)"] = "漂浮(已修复)",
+    ["Laser Steal (Patched)"] = "激光偷窃(已修复)",
+    ["Aimbot"] = "自动瞄准",
+    ["Highest Value Brainrot ESP"] = "高价值Brainrot透视",
+    ["Timer ESP"] = "计时器透视",
+    ["Player ESP"] = "玩家透视",
+    ["Auto Load Script"] = "自动加载脚本",
+    ["Start server hop to find target"] = "开始服务器跳转寻找目标",
+    ["WebHook URL"] = "WebHook链接",
+    ["Find High Value Brainrot Server"] = "查找高价值Brainrot服务器",
+    ["Find < 2 min Guaranteed Mythic Server"] = "查找<2分钟必出神话服务器",
+    ["Min money per sec to find"] = "每秒最低查找金额",
+    ["Server Hop"] = "服务器跳转",
+    ["Job-ID Input"] = "任务ID输入",
+    ["Join Job-ID"] = "加入任务ID",
+    ["Copy Job-ID"] = "复制任务ID",
+    ["Reduce Graphics"] = "降低画质",
+    ["Discord Link (Click to copy)"] = "Discord链接(点击复制)",
+    ["Rejoin & Auto Load Script"] = "重新加入并自动加载脚本",
+    ["Select Item to Buy"] = "选择购买物品",
+    ["Shop"] = "商店",
+    ["Main"] = "主要",
+    ["Player"] = "玩家",
+    ["Finder"] = "查找器",
+    ["Server"] = "服务器",
+    ["Discord"] = "Discord",
+    ["Emerald Slap"] = "翡翠拍击",
+    ["Boogie Bomb"] = "布吉炸弹",
+    ["Slap"] = "拍击",
+    ["Taser Gun"] = "电击枪",
+    ["Rage Table"] = "愤怒桌",
+    ["Bee Launcher"] = "蜜蜂发射器",
+    ["Gold Slap"] = "黄金拍击",
+    ["Rainbowrath Sword"] = "彩虹之怒剑",
+    ["Grapple Hook"] = "抓钩",
+    ["Galaxy Slap"] = "银河拍击",
+    ["Laser Cape"] = "激光斗篷",
+    ["Flame Slap"] = "火焰拍击",
+    ["Paintball Gun"] = "彩弹枪",
+    ["Ruby Slap"] = "红宝石拍击",
+    ["Medusa's Head"] = "美杜莎之头",
+    ["Splatter Slap"] = "泼溅拍击",
+    ["Gravity Coil"] = "重力线圈",
+    ["Invisibility Cloak"] = "隐形斗篷",
+    ["Speed Coil"] = "速度线圈",
+    ["Nuclear Slap"] = "核拍击",
+    ["Quantum Cloner"] = "量子克隆器",
+    ["Trap"] = "陷阱",
+    ["Glitched Slap"] = "故障拍击",
+    ["Diamond Slap"] = "钻石拍击",
+    ["All Seeing Sentry"] = "全视哨兵",
+    ["Web Slinger"] = "织网者",
+    ["Dark Matter Slap"] = "暗物质拍击",
+    ["Body Swap Potion"] = "身体互换药剂",
+    ["Coil Combo"] = "线圈组合",
+    ["Steal Settings"] = "偷窃设置",
+    ["Desync (Need 7 rebirths)\nV keybind"] = "失步(需7次重生)\nV键绑定",
+    ["Steal Upstairs\nY keybind"] = "上楼偷窃\nY键绑定",
+    ["Player Settings"] = "玩家设置",
+    ["Anti Ragdoll"] = "防布娃娃",
+    ["Speed Boost"] = "速度提升",
+    ["Chilli Booster (UI Visible)"] = "辣椒增强器(UI可见)",
+    ["Laser Steal"] = "激光偷窃",
+    ["Desync"] = "失步",
+    ["Chilli Float"] = "辣椒漂浮",
+    ["Works best on low-ping servers (<120)"] = "在低延迟服务器(<120)上运行最佳",
+    ["Join my Discord to join secret servers 100% within 1 min"] = "加入我的Discord在1分钟内100%加入秘密服务器",
+    ["Secret giveaway happening now on my Discord"] = "我的Discord正在进行秘密赠品活动",
+    ["Discord & Notes"] = "Discord和说明",
+    ["Rejoin current server and auto-run script at teleport"] = "重新加入当前服务器并在传送时自动运行脚本",
+    
+    -- Voidware
+    ["Search"] = "搜索",
+    ["Information"] = "信息",
+    ["Automation"] = "自动化",
+    ["Bring Stuff"] = "物品获取",
+    ["Fishing"] = "钓鱼",
+    ["Visuals"] = "视觉",
+    ["Local Player"] = "本地玩家",
+    ["Misc"] = "杂项",
+    ["Theme"] = "主题",
+    ["Auto Crock Pot"] = "自动锅",
+    ["Food Choice"] = "食物选择",
+    ["Auto Campfire"] = "自动营火",
+    ["Fuel Type"] = "燃料类型",
+    ["Auto Fill Campfire"] = "自动填充营火",
+    ["Auto Open Seed Boxes"] = "自动打开种子箱",
+    ["Auto Chest [BETA]"] = "自动宝箱[测试版]",
+    ["Bring Location"] = "获取位置",
+    ["Loot Mode"] = "战利品模式",
+    ["Loot Radius"] = "战利品范围",
+    ["Chest Delay (sec)"] = "宝箱延迟(秒)",
+    ["Plant Stuff"] = "种植",
+    ["Build Radius"] = "建造范围",
+    ["Angle Increment"] = "角度增量",
+    ["Plant/Build Limit"] = "种植/建造限制",
+    ["Build Log Walls in Circle"] = "环形建造原木墙",
+    ["Ultra Fast"] = "超快速",
+    ["Workbench"] = "工作台",
+    ["Fire"] = "营火",
+    ["Entity Godmode"] = "实体无敌",
+    ["Hip Height Changer"] = "臀部高度调整",
+    ["Kill Aura"] = "杀戮光环",
+    ["Kill Aura Range"] = "杀戮光环范围",
+    ["Ice Aura"] = "冰冻光环",
+    ["Auto Eat Food"] = "自动进食",
+    ["Eat When Hunger Below"] = "饥饿时进食",
+    ["Auto Bandage"] = "自动绷带",
+    ["MedKit included"] = "包含医疗包",
+    ["Heal When Below"] = "低于时治疗",
+    ["Hitbox Expansion"] = "碰撞箱扩展",
+    ["Enable Hitbox Expansion"] = "启用碰撞箱扩展",
+    ["Hitbox Size Multiplier"] = "碰撞箱大小倍数",
+    ["Instant Open Chests"] = "立即打开宝箱",
+    ["Auto TP to Camp at Night"] = "夜间自动传送至营地",
+    ["TP to Camp"] = "传送至营地",
+    ["Teleport to Fishing Hut"] = "传送至钓鱼小屋",
+    ["100% Fishing Success Rate"] = "100%钓鱼成功率",
+    ["Instant Catch Fish"] = "立即捕获鱼",
+    ["Auto TP to Warm Place"] = "自动传送至温暖地点",
+    ["Chest TP [BETA]"] = "宝箱传送[测试版]",
+    ["Chest Dropdown"] = "宝箱下拉菜单",
+    ["Teleport To Chest"] = "传送至宝箱",
+    ["Refresh Chest List"] = "刷新宝箱列表",
+    ["Child TP"] = "孩子传送",
+    ["选择 Child"] = "选择孩子",
+    ["Teleport To Child"] = "传送至孩子",
+    ["Lost Child"] = "迷路的孩子",
+    ["Refresh Children List"] = "刷新孩子列表",
+    ["Structure TP"] = "建筑传送",
+    ["选择 Structure"] = "选择建筑",
+    ["Teleport To Selected Structure"] = "传送至选定建筑",
+    ["Other TP"] = "其他传送",
+    ["Teleport to Cultist Generator Base"] = "传送至信徒生成器基地",
+    ["Teleport to Stronghold"] = "传送至要塞",
+    ["Teleport to Stronghold Diamond Chest"] = "传送至要塞钻石宝箱",
+    ["Teleport to Caravan"] = "传送至商队",
+    ["Teleport to Fairy"] = "传送至仙女",
+    ["Teleport to Anvil"] = "传送至铁砧",
+    ["Main ESP"] = "主要透视",
+    ["PlayerEspColor"] = "玩家透视颜色",
+    ["Fishing ESP"] = "钓鱼透视",
+    ["FishingEspColor"] = "钓鱼透视颜色",
+    ["Fishing Items"] = "钓鱼物品",
+    ["Children ESP"] = "孩子透视",
+    ["FuelEspColor"] = "燃料透视颜色",
+    ["Fuel Items"] = "燃料物品",
+    ["Food & Healing ESP"] = "食物和治疗透视",
+    ["FoodHealingEspColor"] = "食物和治疗透视颜色",
+    ["Food & Healing Items"] = "食物和治疗物品",
+    ["TP Walk Speed"] = "传送行走速度",
+    ["TP Walk"] = "传送行走",
+    ["Noclip"] = "穿墙",
+    ["Useful Stuff"] = "实用功能",
+    ["Fullbright"] = "全亮",
+    ["Remove Fog"] = "移除雾气",
+    ["Remove Sky"] = "移除天空",
+    ["Ambient"] = "环境",
+    ["Rich Shader"] = "丰富着色器",
+    ["Shader Color"] = "着色器颜色",
+    ["Lighting Theme"] = "照明主题",
+    ["Enable Lighting Theme"] = "启用照明主题",
+    ["Aesthetic Lighting"] = "美学照明",
+    ["Security"] = "安全",
+    ["Voidware [Official] #50k"] = "Voidware[官方] #50k",
+    ["Member Count"] = "成员数量",
+    ["Online Count"] = "在线数量",
+    ["Update Discord Info"] = "更新Discord信息",
+    ["Voidware Keybind"] = "Voidware快捷键",
+    ["Keybind to open ui"] = "打开界面快捷键",
+    ["Join Discord Server"] = "加入Discord服务器",
+    ["Welcome to Voidware!"] = "欢迎使用Voidware!",
+    ["Make sure to join our discord server for updates!"] = "请加入我们的Discord服务器获取更新!",
+    ["Unload"] = "卸载",
+    ["Language Choice"] = "语言选择",
+    ["Library Choice"] = "库选择",
+    ["Obsidian"] = "黑曜石",
+    ["LinoriaLib"] = "Linoria库",
+    ["Wind"] = "风",
+    ["Reveal Map"] = "显示地图",
+    ["Teleport All Trees"] = "传送所有树木",
+    ["Teleport All BIG Trees"] = "传送所有大树",
+    ["Teleport All Chests"] = "传送所有宝箱",
+    ["Teleport All Children [BETA]"] = "传送所有孩子[测试版]",
+    ["Teleport Entities"] = "传送实体",
+    ["Teleport The Entities"] = "传送这些实体",
+    ["Freeze the movement of something :3"] = "冻结某物的移动:3",
+    ["Freeze The Thingys"] = "冻结这些事物",
+    ["UnFreeze The Thingys"] = "解冻这些事物",
+    ["Frog"] = "青蛙",
+    ["Scorpion"] = "蝎子",
+    ["Hellephant"] = "地狱象",
+    ["Ram"] = "公羊",
+    ["Nail"] = "钉子",
+    ["FrogBlue"] = "蓝青蛙",
+    ["Fly"] = "飞行",
+    ["Fly Speed"] = "飞行速度",
+    ["Obsidian - ui library"] = "黑曜石 - UI库",
+    ["Wind - ui library"] = "风 - UI库",
+    ["mspaint v2"] = "mspaint v2",
+    ["Inf Yield"] = "无限产出",
+    ["Please notify me if you need credits (erchodev#0 on discord)"] = "如需鸣谢请通知我(Discord: erchodev#0)",
+    ["Reset Camera [Might Break your camera!]"] = "重置相机[可能损坏相机!]",
+    ["Anti Void"] = "防虚空",
+    ["Coordinates"] = "坐标",
+    ["Show Coordinates"] = "显示坐标",
+    ["erchodev#0 - script dev"] = "erchodev#0 - 脚本开发者",
+    ["Linoria - ui library"] = "Linoria - UI库",
+    ["Performance"] = "性能",
+    ["Low GFX"] = "低画质",
+    ["选择 Theme"] = "选择主题",
+    ["Toggle Window Transparency"] = "切换窗口透明度",
+    ["Theme Name"] = "主题名称",
+    ["Lavender"] = "薰衣草",
+    ["This function requires VW Private - to buy go to OO汉化"] = "此功能需要VW私人版 - 购买请前往OO汉化",
+    ["Become Invincible"] = "变得无敌",
+    ["Makes you unhittable by other entities\nYou also can't die from hunger"] = "使你不会被其他实体击中\n也不会饿死",
+    ["Untouchable by 其他"] = "不被其他玩家触碰",
+    ["Makes the brought items untouchable by other players"] = "使获取的物品不被其他玩家触碰",
+    ["Bring Meteor Items"] = "获取流星物品",
+    ["Items Choice"] = "物品选择",
+    ["Cleanup 大树s"] = "清理大树",
+    ["Cleanup Logs"] = "清理原木",
+    ["This deletes ALL logs from the map PERMANENTLY!"] = "这将永久删除地图上所有原木!",
+    ["Fill Transparency"] = "填充透明度",
+    ["Outline Transparency"] = "轮廓透明度",
+    ["Text Size"] = "文字大小",
+    ["Self"] = "自身",
+    ["FOV"] = "视野",
+    ["Movement"] = "移动",
+    ["Background Color"] = "背景颜色",
+    ["Outline Color"] = "轮廓颜色",
+    ["Text Color"] = "文字颜色",
+    ["Placeholder Text Color"] = "占位符文字颜色",
+    ["Voidware"] = "Voidware",
+    ["VW Private"] = "VW私人版",
+    ["Plant Saplings in One Place"] = "在一处种植树苗",
+    ["Bring Settings"] = "获取设置",
+    ["Use Freecam for Bring Items"] = "使用自由视角获取物品",
+    ["Bring Method"] = "获取方法",
+    ["Max Per Item"] = "每项物品最大数量",
+    ["Bring Cooldown"] = "获取冷却时间",
+    ["No Bring Amount Limit"] = "无获取数量限制",
+    ["Bring Height"] = "获取高度",
+    ["Bring Cultists"] = "获取信徒",
+    ["Cultist Choice"] = "信徒选择",
+    ["Bring Fuel [BETA]"] = "获取燃料[测试版]",
+    ["Bring Logs [BETA]"] = "获取原木[测试版]",
+    ["Bring Food & Healing"] = "获取食物和治疗",
+    ["Food & Healing"] = "食物和治疗",
+    ["Bring Gears"] = "获取齿轮",
+    ["Gears"] = "齿轮",
+    ["Bring Guns & Armor"] = "获取枪支和护甲",
+    ["Guns & Armor"] = "枪支和护甲",
+    ["Bring 其他"] = "获取其他",
+    ["Gears ESP"] = "齿轮透视",
+    ["GearsEspColor"] = "齿轮透视颜色",
+    ["Gears Items"] = "齿轮物品",
+    ["孩子ESP"] = "孩子透视",
+    ["Children"] = "孩子",
+    ["ChildrenEspColor"] = "孩子透视颜色",
+    ["Children Items"] = "孩子物品",
+    ["Guns & Armor ESP"] = "枪支和护甲透视",
+    ["GunsArmorEspColor"] = "枪支护甲透视颜色",
+    ["Guns & Armor Items"] = "枪支和护甲物品",
+    ["Characters ESP"] = "角色透视",
+    ["Characters"] = "角色",
+    ["CharactersEspColor"] = "角色透视颜色",
+    ["Characters Items"] = "角色物品",
+    ["ESP Settings"] = "透视设置",
+    ["OO汉化"] = "OO汉化",
+    ["Enable Highlight"] = "启用高亮",
+    ["Show Distance"] = "显示距离",
+    ["Save"] = "保存",
+    ["Saves elements to config"] = "将元素保存到配置",
+    ["Load"] = "加载",
+    ["Loads elements from config"] = "从配置加载元素",
+    ["This tab is empty"] = "此标签页为空",
+    ["Voidware | 99 Nights In The..."] = "Voidware | 森林中的99夜...",
+    ["Go In Game for Voidware to load :D [You are in lobby currently]"] = "进入游戏以加载Voidware :D [您当前在大厅]",
+    ["Purple"] = "紫色",
+    ["Galaxy"] = "银河",
+    ["BetterNight"] = "更好的夜晚",
+    ["BetterNight2"] = "更好的夜晚2",
+    ["MagentaOrange"] = "洋红橙色",
+    ["Purple2"] = "紫色2",
+    ["Galaxy2"] = "银河2",
+    ["Pink"] = "粉色",
+    ["Purple3"] = "紫色3",
+    ["DarkishPink"] = "暗粉色",
+    ["Space"] = "太空",
+    ["Galaxy3"] = "银河3",
+    ["NetherWorld"] = "下界世界",
+    ["Nebula"] = "星云",
+    ["PurpleNight"] = "紫色之夜",
+    ["Aesthetic"] = "美学",
+    ["Tree Farm"] = "树木农场",
+    ["自动 Chop Tree Type"] = "自动砍树类型",
+    ["Small Tree,..."] = "小树,...",
+    ["自动 Chop Trees"] = "自动砍树",
+    ["自动 Chop Trees Range10"] = "自动砍树范围10",
+    ["自动 Plant Saplings"] = "自动种植树苗",
+    ["Chop Status Visualiser"] = "砍伐状态可视化",
+    ["Small Tree"] = "小树",
+    ["Big Tree"] = "大树",
+    ["Snowy Small Tree"] = "雪地小树",
+    ["章鱼"] = "章鱼",
+    ["鳟鱼"] = "鳟鱼",
+    ["Ribs"] = "肋骨",
+    ["Ste菜"] = "牛排",
+    ["牛排晚餐"] = "牛排晚餐",
+    ["Ore Aura"] = "矿石光环",
+    ["Ore Aura Range"] = "矿石光环范围",
+    ["Cultist King"] = "信徒之王",
+    ["Meteor Crab"] = "流星蟹",
+    ["Polar Bear"] = "北极熊",
+    ["Arctic Fox"] = "北极狐",
+    ["Stop"] = "停止"
+}
+
+local function translateText(text)
+    if not text or type(text) ~= "string" then return text end
+    
+    if Translations[text] then
+        return Translations[text]
+    end
+    
+    for en, cn in pairs(Translations) do
+        if text:find(en) then
+            return text:gsub(en, cn)
+        end
+    end
+    
+    return text
+end
+
+local function setupTranslationEngine()
+    local success, err = pcall(function()
+        local oldIndex = getrawmetatable(game).__newindex
+        setreadonly(getrawmetatable(game), false)
+        
+        getrawmetatable(game).__newindex = newcclosure(function(t, k, v)
+            if (t:IsA("TextLabel") or t:IsA("TextButton") or t:IsA("TextBox")) and k == "Text" then
+                v = translateText(tostring(v))
+            end
+            return oldIndex(t, k, v)
+        end)
+        
+        setreadonly(getrawmetatable(game), true)
+    end)
+    
+    if not success then
+        warn("元表劫持失败:", err)
+       
+        local translated = {}
+        local function scanAndTranslate()
+            for _, gui in ipairs(game:GetService("CoreGui"):GetDescendants()) do
+                if (gui:IsA("TextLabel") or gui:IsA("TextButton") or gui:IsA("TextBox")) and not translated[gui] then
+                    pcall(function()
+                        local text = gui.Text
+                        if text and text ~= "" then
+                            local translatedText = translateText(text)
+                            if translatedText ~= text then
+                                gui.Text = translatedText
+                                translated[gui] = true
+                            end
+                        end
+                    end)
+                end
+            end
+            
+            local player = game:GetService("Players").LocalPlayer
+            if player and player:FindFirstChild("PlayerGui") then
+                for _, gui in ipairs(player.PlayerGui:GetDescendants()) do
+                    if (gui:IsA("TextLabel") or gui:IsA("TextButton") or gui:IsA("TextBox")) and not translated[gui] then
+                        pcall(function()
+                            local text = gui.Text
+                            if text and text ~= "" then
+                                local translatedText = translateText(text)
+                                if translatedText ~= text then
+                                    gui.Text = translatedText
+                                    translated[gui] = true
+                                end
+                            end
+                        end)
+                    end
+                end
+            end
+        end
+        
+        local function setupDescendantListener(parent)
+            parent.DescendantAdded:Connect(function(descendant)
+                if descendant:IsA("TextLabel") or descendant:IsA("TextButton") or descendant:IsA("TextBox") then
+                    task.wait(0.1)
+                    pcall(function()
+                        local text = descendant.Text
+                        if text and text ~= "" then
+                            local translatedText = translateText(text)
+                            if translatedText ~= text then
+                                descendant.Text = translatedText
+                            end
+                        end
+                    end)
+                end
+            end)
+        end
+        
+        pcall(setupDescendantListener, game:GetService("CoreGui"))
+        local player = game:GetService("Players").LocalPlayer
+        if player and player:FindFirstChild("PlayerGui") then
+            pcall(setupDescendantListener, player.PlayerGui)
+        end
+        
+        while true do
+            scanAndTranslate()
+            task.wait(3)
+        end
+    end
+end
+
+task.wait(2)
+
+setupTranslationEngine()
+
+local success, err = pcall(function()
+--这下面填加载外部脚本
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenithlity/ZenikazeHub/refs/heads/main/ZenikazeV3.1"))()
+
+
+end)
+
+if not success then
+    warn("加载失败:", err)
+end
