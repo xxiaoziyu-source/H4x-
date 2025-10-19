@@ -423,7 +423,69 @@ local Translations = {
     ["Meteor Crab"] = "流星蟹",
     ["Polar Bear"] = "北极熊",
     ["Arctic Fox"] = "北极狐",
-    ["Stop"] = "停止"
+    ["Stop"] = "停止",
+    -- 主菜单
+[" Auto"] = "全局自动",
+[" Toggle All"] = "开关全部",
+[" Enabled"] = "启用",
+[" Aura"] = "光环",
+
+-- 树木光环
+[" Tree Aura"] = "树木光环",
+[" Tree Aura Range"] = "树木光环范围",
+[" Tree Aura Type"] = "树木光环类型",
+[" Tree Aura Type Desc"] = "选择砍伐和种植的树木类型",
+[" Normal Trees"] = "普通树木",
+[" Pine Trees"] = "松树",
+[" Cherry Trees"] = "樱桃树",
+[" Jungle Trees"] = "丛林树",
+[" Koa Trees"] = "洋槐树",
+[" Palm Trees"] = "棕榈树",
+[" Auto Plant Normal"] = "自动种植普通树",
+[" Auto Plant Pine"] = "自动种植松树",
+[" Auto Plant Cherry"] = "自动种植樱桃树",
+[" Auto Plant Jungle"] = "自动种植丛林树",
+[" Auto Plant Koa"] = "自动种植洋槐树",
+[" Auto Plant Palm"] = "自动种植棕榈树",
+[" Visualizer"] = "可视化范围",
+[" Require Tool"] = "需要工具",
+[" Require Tool Desc"] = "需要手持正确的工具才能工作",
+[" Auto TP"] = "自动传送",
+[" Auto TP Desc"] = "当目标超出范围时自动传送",
+[" Tree Aura Delay"] = "树木光环延迟",
+
+-- 驯服
+[" Taming"] = "驯服",
+[" 100% Tame"] = "100% 驯服成功",
+[" Auto Bring Items"] = "自动携带物品",
+[" Auto Bring Items Desc"] = "自动将所需物品放入背包",
+[" Bring Steak"] = "携带牛排",
+[" Bring Carrot"] = "携带胡萝卜",
+[" Instant Minigame"] = "即时小游戏",
+
+-- 万圣节活动
+[" Halloween"] = "万圣节",
+[" Auto Grab Pumpkin"] = "自动获取南瓜",
+[" Auto Grab Bucket"] = "自动获取木桶",
+[" Auto Grab Candle"] = "自动获取蜡烛",
+[" Auto Open All Chests"] = "自动开启所有宝箱",
+[" TP To House"] = "传送到房屋",
+[" TP To House Desc"] = "传送到万圣节房屋",
+[" Auto Load Map"] = "自动加载地图",
+[" Auto Load Map Desc"] = "通过绕圈移动来确保地图完全加载",
+[" Auto Halloween"] = "自动万圣节",
+[" Auto Halloween Desc"] = "自动完成万圣节活动任务",
+
+-- 通用设置
+[" Settings"] = "设置",
+[" WalkSpeed"] = "移动速度",
+[" WalkSpeed Desc"] = "设置玩家移动速度",
+[" JumpPower"] = "跳跃力量",
+[" JumpPower Desc"] = "设置玩家跳跃高度",
+[" Auto Swing"] = "自动挥杆",
+[" Hide Ui"] = "隐藏界面",
+[" Rejoin"] = "重新加入",
+[" Serverhop"] = "切换服务器"
 }
 
 local function translateText(text)
