@@ -1,0 +1,667 @@
+-- F3X精简版（删除反撤销和方块叠加）
+local Player = game:GetService("Players").LocalPlayer
+local PlayerGui = Player:WaitForChild("PlayerGui")
+local Mouse = Player:GetMouse()
+local UIS = game:GetService("UserInputService")
+local Debris = game:GetService("Debris")
+
+local selectedPart = nil
+local currentPanel = nil
+local selectionBox = nil
+local history = {}
+local historyIndex = 0
+
+-- 主UI
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "F3XTool"
+ScreenGui.Parent = PlayerGui
+
+-- 主面板（黑色透明+可拖动）
+local MainPanel = Instance.new("Frame")
+MainPanel.Size = UDim2.new(0, 160, 0, 750)
+MainPanel.Position = UDim2.new(0.02, 0, 0.05, 0)
+MainPanel.BackgroundColor3 = Color3.new(0, 0, 0)
+MainPanel.BackgroundTransparency = 0.3
+MainPanel.BorderSizePixel = 2
+MainPanel.BorderColor3 = Color3.new(0.5, 0.5, 0.5)
+MainPanel.Parent = ScreenGui
+
+-- 面板拖动
+local function makeDraggable(frame)
+    local dragging, dragStart, startPos = false, Vector2.new(), UDim2.new()
+    frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true
+            dragStart = input.Position
+            startPos = frame.Position
+            input:GetMouse().Icon = "rbxassetid://227355544"
+        end
+    end)
+    UIS.InputChanged:Connect(function(input)
+        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+            local delta = input.Position - dragStart
+            frame.Position = UDim2.new(
+                startPos.X.Scale, startPos.X.Offset + delta.X,
+                startPos.Y.Scale, startPos.Y.Offset + delta.Y
+            )
+        end
+    end)
+    UIS.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = false
+            input:GetMouse().Icon = ""
+        end
+    end)
+end
+makeDraggable(MainPanel)
+
+-- 标题栏
+local TitleBar = Instance.new("Frame")
+TitleBar.Size = UDim2.new(1, 0, 0, 35)
+TitleBar.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+TitleBar.Parent = MainPanel
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(0.8, 0, 1, 0)
+Title.Position = UDim2.new(0, 0, 0, 0)
+Title.Text = "F3X工具"
+Title.TextColor3 = Color3.new(1, 1, 1)
+Title.TextScaled = true
+Title.BackgroundTransparency = 1
+Title.Parent = TitleBar
+
+-- 作者信息
+local AuthorLabel = Instance.new("TextLabel")
+AuthorLabel.Size = UDim2.new(0.2, 0, 1, 0)
+AuthorLabel.Position = UDim2.new(0.8, 0, 0, 0)
+AuthorLabel.Text = "作者:○○"
+AuthorLabel.TextColor3 = Color3.new(1, 1, 1)
+AuthorLabel.TextScaled = true
+AuthorLabel.BackgroundTransparency = 1
+AuthorLabel.Parent = TitleBar
+
+-- 隐藏/显示按钮
+local toggleBtn = Instance.new("TextButton")
+toggleBtn.Size = UDim2.new(0, 30, 0, 30)
+toggleBtn.Position = UDim2.new(1, -35, 0, 2)
+toggleBtn.BackgroundColor3 = Color3.new(0.3, 0.3, 0.3)
+toggleBtn.Text = "−"
+toggleBtn.TextColor3 = Color3.new(1, 1, 1)
+toggleBtn.TextScaled = true
+toggleBtn.Parent = TitleBar
+
+local isCollapsed = false
+toggleBtn.MouseButton1Click:Connect(function()
+    isCollapsed = not isCollapsed
+    if isCollapsed then
+        MainPanel.Size = UDim2.new(0, 160, 0, 35)
+        toggleBtn.Text = "+"
+    else
+        MainPanel.Size = UDim2.new(0, 160, 0, 750)
+        toggleBtn.Text = "−"
+    end
+end)
+
+-- 关闭面板
+local function closeCurrentPanel()
+    if currentPanel then
+        currentPanel:Destroy()
+        currentPanel = nil
+    end
+end
+
+-- 创建按钮
+local function createButton(name, color, posY, callback)
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(1, 0, 0, 30)
+    btn.Position = UDim2.new(0, 0, posY, 0)
+    btn.BackgroundColor3 = color
+    btn.BackgroundTransparency = 0.2
+    btn.Text = name
+    btn.TextColor3 = Color3.new(1, 1, 1)
+    btn.TextScaled = true
+    btn.BorderSizePixel = 1
+    btn.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+    btn.Parent = MainPanel
+    btn.MouseButton1Click:Connect(function()
+        closeCurrentPanel()
+        callback()
+    end)
+    return btn
+end
+
+-- 记录历史
+local function recordHistory(action, data)
+    table.insert(history, {action = action, data = data})
+    historyIndex = #history
+end
+
+-- 选中框架
+local function showSelectionBox(part)
+    if selectionBox then selectionBox:Destroy() end
+    if not part then return end
+    local box = Instance.new("SelectionBox")
+    box.Adornee = part
+    box.Color3 = Color3.new(1, 0.8, 0)
+    box.LineThickness = 0.05
+    box.Parent = ScreenGui
+    selectionBox = box
+end
+
+-- 1. 选择方块
+Mouse.Button1Down:Connect(function()
+    if Mouse.Target and Mouse.Target:IsA("BasePart") then
+        selectedPart = Mouse.Target
+        showSelectionBox(selectedPart)
+    else
+        selectedPart = nil
+        showSelectionBox(nil)
+    end
+end)
+
+-- 2. 移动方块
+createButton("移动方块", Color3.new(0.2, 0.4, 0.6), 0.05, function()
+    if not selectedPart then return end
+    currentPanel = Instance.new("Frame")
+    currentPanel.Size = UDim2.new(0, 200, 0, 150)
+    currentPanel.Position = UDim2.new(0.15, 0, 0.2, 0)
+    currentPanel.BackgroundColor3 = Color3.new(0, 0, 0)
+    currentPanel.BackgroundTransparency = 0.3
+    currentPanel.Parent = ScreenGui
+    makeDraggable(currentPanel)
+
+    local dirs = {
+        {"上", Vector3.new(0,2,0)}, {"下", Vector3.new(0,-2,0)},
+        {"左", Vector3.new(-2,0,0)}, {"右", Vector3.new(2,0,0)},
+        {"前", Vector3.new(0,0,2)}, {"后", Vector3.new(0,0,-2)}
+    }
+    for i, dir in ipairs(dirs) do
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(0.3, 0, 0, 30)
+        btn.Position = UDim2.new((i-1)%3*0.35, 0, math.floor((i-1)/3)*0.3, 0)
+        btn.Text = dir[1]
+        btn.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+        btn.BackgroundTransparency = 0.4
+        btn.TextColor3 = Color3.new(1, 1, 1)
+        btn.Parent = currentPanel
+        btn.MouseButton1Click:Connect(function()
+            recordHistory("move", {part = selectedPart, oldPos = selectedPart.Position})
+            selectedPart.Position = selectedPart.Position + dir[2]
+        end)
+    end
+end)
+
+-- 3. 删除方块
+createButton("删除方块", Color3.new(0.6, 0.2, 0.2), 0.1, function()
+    if selectedPart then
+        local clone = selectedPart:Clone()
+        clone.Parent = nil
+        recordHistory("delete", {part = selectedPart, clone = clone})
+        selectedPart:Destroy()
+        selectedPart = nil
+        showSelectionBox(nil)
+    end
+end)
+
+-- 4. 调节颜色（16种）
+createButton("调节颜色", Color3.new(0.5, 0.2, 0.6), 0.15, function()
+    if not selectedPart then return end
+    currentPanel = Instance.new("Frame")
+    currentPanel.Size = UDim2.new(0, 320, 0, 120)
+    currentPanel.Position = UDim2.new(0.15, 0, 0.2, 0)
+    currentPanel.BackgroundColor3 = Color3.new(0, 0, 0)
+    currentPanel.BackgroundTransparency = 0.3
+    currentPanel.Parent = ScreenGui
+    makeDraggable(currentPanel)
+
+    local colors = {
+        Color3.new(1,0,0), Color3.new(1,0.5,0), Color3.new(1,1,0), Color3.new(0.5,1,0),
+        Color3.new(0,1,0), Color3.new(0,1,0.5), Color3.new(0,1,1), Color3.new(0,0.5,1),
+        Color3.new(0,0,1), Color3.new(0.5,0,1), Color3.new(1,0,1), Color3.new(1,0,0.5),
+        Color3.new(1,1,1), Color3.new(0.8,0.8,0.8), Color3.new(0.5,0.5,0.5), Color3.new(0,0,0)
+    }
+    for i, color in ipairs(colors) do
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(0, 30, 0, 30)
+        btn.Position = UDim2.new(10 + ((i-1)%8)*35, 0, 10 + math.floor((i-1)/8)*35, 0)
+        btn.BackgroundColor3 = color
+        btn.Text = ""
+        btn.Parent = currentPanel
+        btn.MouseButton1Click:Connect(function()
+            recordHistory("color", {part = selectedPart, oldColor = selectedPart.BrickColor})
+            selectedPart.BrickColor = BrickColor.new(color)
+        end)
+    end
+end)
+
+-- 5. 旋转方块
+createButton("旋转方块", Color3.new(0.2, 0.6, 0.4), 0.2, function()
+    if not selectedPart then return end
+    currentPanel = Instance.new("Frame")
+    currentPanel.Size = UDim2.new(0, 200, 0, 100)
+    currentPanel.Position = UDim2.new(0.15, 0, 0.2, 0)
+    currentPanel.BackgroundColor3 = Color3.new(0, 0, 0)
+    currentPanel.BackgroundTransparency = 0.3
+    currentPanel.Parent = ScreenGui
+    makeDraggable(currentPanel)
+
+    local axes = {{"X轴", Vector3.new(22.5,0,0)}, {"Y轴", Vector3.new(0,22.5,0)}, {"Z轴", Vector3.new(0,0,22.5)}}
+    for i, axis in ipairs(axes) do
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(0.4, 0, 0, 30)
+        btn.Position = UDim2.new(0.05 + (i-1)%2*0.5, 0, math.floor((i-1)/2)*0.3, 0)
+        btn.Text = axis[1].."旋转22.5°"
+        btn.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+        btn.BackgroundTransparency = 0.4
+        btn.TextColor3 = Color3.new(1, 1, 1)
+        btn.Parent = currentPanel
+        btn.MouseButton1Click:Connect(function()
+            recordHistory("rotate", {part = selectedPart, oldRot = selectedPart.Rotation})
+            selectedPart.Rotation = selectedPart.Rotation + axis[2]
+        end)
+    end
+end)
+
+-- 6. 复制方块（在原位置生成）
+createButton("复制方块", Color3.new(0.4, 0.4, 0.4), 0.25, function()
+    if not selectedPart then return end
+    local clone = selectedPart:Clone()
+    clone.Position = selectedPart.Position + Vector3.new(0, selectedPart.Size.Y, 0) -- 原位置上方
+    clone.Anchored = true
+    clone.Parent = workspace
+    recordHistory("copy", {part = clone})
+end)
+
+-- 7. 固定/解除固定
+createButton("固定/解除固定", Color3.new(0.6, 0.4, 0.2), 0.3, function()
+    if not selectedPart then return end
+    recordHistory("anchor", {part = selectedPart, oldAnchor = selectedPart.Anchored})
+    selectedPart.Anchored = not selectedPart.Anchored
+    local tip = Instance.new("TextLabel")
+    tip.Size = UDim2.new(0, 120, 0, 20)
+    tip.Position = UDim2.new(0.45, 0, 0.05, 0)
+    tip.Text = selectedPart.Anchored and "已固定" or "未固定"
+    tip.TextColor3 = Color3.new(1, 1, 1)
+    tip.BackgroundColor3 = Color3.new(0, 0, 0)
+    tip.BackgroundTransparency = 0.3
+    tip.Parent = ScreenGui
+    Debris:AddItem(tip, 1)
+end)
+
+-- 8. 表面添加文字（可调节大小）
+createButton("表面添加文字", Color3.new(0.6, 0.6, 0.2), 0.35, function()
+    if not selectedPart then return end
+    currentPanel = Instance.new("Frame")
+    currentPanel.Size = UDim2.new(0, 280, 0, 120)
+    currentPanel.Position = UDim2.new(0.15, 0, 0.2, 0)
+    currentPanel.BackgroundColor3 = Color3.new(0, 0, 0)
+    currentPanel.BackgroundTransparency = 0.3
+    currentPanel.Parent = ScreenGui
+    makeDraggable(currentPanel)
+
+    local input = Instance.new("TextBox")
+    input.Size = UDim2.new(0.8, 0, 0, 30)
+    input.Position = UDim2.new(0.1, 0, 0.05, 0)
+    input.PlaceholderText = "输入文字"
+    input.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+    input.BackgroundTransparency = 0.4
+    input.TextColor3 = Color3.new(1, 1, 1)
+    input.Parent = currentPanel
+
+    local sizeLabel = Instance.new("TextLabel")
+    sizeLabel.Size = UDim2.new(0.25, 0, 0, 20)
+    sizeLabel.Position = UDim2.new(0.05, 0, 0.45, 0)
+    sizeLabel.Text = "字体大小:"
+    sizeLabel.TextColor3 = Color3.new(1, 1, 1)
+    sizeLabel.BackgroundTransparency = 1
+    sizeLabel.Parent = currentPanel
+
+    local sizeInput = Instance.new("TextBox")
+    sizeInput.Size = UDim2.new(0.2, 0, 0, 25)
+    sizeInput.Position = UDim2.new(0.35, 0, 0.43, 0)
+    sizeInput.Text = "32"
+    sizeInput.TextColor3 = Color3.new(1, 1, 1)
+    sizeInput.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+    sizeInput.BackgroundTransparency = 0.4
+    sizeInput.Parent = currentPanel
+
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(0.25, 0, 0, 30)
+    btn.Position = UDim2.new(0.65, 0, 0.42, 0)
+    btn.Text = "确认"
+    btn.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+    btn.BackgroundTransparency = 0.4
+    btn.TextColor3 = Color3.new(1, 1, 1)
+    btn.Parent = currentPanel
+    btn.MouseButton1Click:Connect(function()
+        local sg = Instance.new("SurfaceGui")
+        sg.Parent = selectedPart
+        sg.Face = Enum.NormalId.Front
+        
+        local lbl = Instance.new("TextLabel")
+        lbl.Size = UDim2.new(1, 0, 1, 0)
+        lbl.Text = input.Text
+        lbl.TextColor3 = Color3.new(1, 1, 1)
+        lbl.BackgroundTransparency = 1
+        lbl.TextScaled = false
+        lbl.TextSize = tonumber(sizeInput.Text) or 32
+        lbl.Parent = sg
+        
+        recordHistory("text", {part = selectedPart, sg = sg})
+        closeCurrentPanel()
+    end)
+end)
+
+-- 9. 设置亮度
+createButton("设置亮度", Color3.new(0.4, 0.4, 0.4), 0.4, function()
+    if not selectedPart then return end
+    currentPanel = Instance.new("Frame")
+    currentPanel.Size = UDim2.new(0, 200, 0, 80)
+    currentPanel.Position = UDim2.new(0.15, 0, 0.2, 0)
+    currentPanel.BackgroundColor3 = Color3.new(0, 0, 0)
+    currentPanel.BackgroundTransparency = 0.3
+    currentPanel.Parent = ScreenGui
+    makeDraggable(currentPanel)
+
+    local input = Instance.new("TextBox")
+    input.Size = UDim2.new(0.6, 0, 0, 30)
+    input.Position = UDim2.new(0.2, 0, 0.1, 0)
+    input.Text = "1"
+    input.TextColor3 = Color3.new(1, 1, 1)
+    input.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+    input.BackgroundTransparency = 0.4
+    input.Parent = currentPanel
+
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(0.4, 0, 0, 30)
+    btn.Position = UDim2.new(0.3, 0, 0.6, 0)
+    btn.Text = "应用"
+    btn.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+    btn.BackgroundTransparency = 0.4
+    btn.TextColor3 = Color3.new(1, 1, 1)
+    btn.Parent = currentPanel
+    btn.MouseButton1Click:Connect(function()
+        local b = tonumber(input.Text) or 1
+        recordHistory("brightness", {part = selectedPart, oldMat = selectedPart.Material, oldColor = selectedPart.Color})
+        selectedPart.Material = Enum.Material.Neon
+        selectedPart.Color = Color3.new(b, b, b)
+        closeCurrentPanel()
+    end)
+end)
+
+-- 10. 缩放方块（6方向）
+createButton("缩放方块", Color3.new(0.4, 0.6, 0.6), 0.45, function()
+    if not selectedPart then return end
+    currentPanel = Instance.new("Frame")
+    currentPanel.Size = UDim2.new(0, 240, 0, 130)
+    currentPanel.Position = UDim2.new(0.15, 0, 0.2, 0)
+    currentPanel.BackgroundColor3 = Color3.new(0, 0, 0)
+    currentPanel.BackgroundTransparency = 0.3
+    currentPanel.Parent = ScreenGui
+    makeDraggable(currentPanel)
+
+    local dirs = {
+        {"+X", Vector3.new(1.1,1,1)}, {"-X", Vector3.new(0.9,1,1)},
+        {"+Y", Vector3.new(1,1.1,1)}, {"-Y", Vector3.new(1,0.9,1)},
+        {"+Z", Vector3.new(1,1,1.1)}, {"-Z", Vector3.new(1,1,0.9)}
+    }
+    for i, dir in ipairs(dirs) do
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(0.28, 0, 0, 30)
+        btn.Position = UDim2.new(0.05 + ((i-1)%3)*0.32, 0, 0.1 + math.floor((i-1)/3)*0.3, 0)
+        btn.Text = dir[1]
+        btn.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+        btn.BackgroundTransparency = 0.4
+        btn.TextColor3 = Color3.new(1, 1, 1)
+        btn.Parent = currentPanel
+        btn.MouseButton1Click:Connect(function()
+            recordHistory("scale", {part = selectedPart, oldSize = selectedPart.Size})
+            selectedPart.Size = selectedPart.Size * dir[2]
+        end)
+    end
+
+    local uniformBtn = Instance.new("TextButton")
+    uniformBtn.Size = UDim2.new(0.4, 0, 0, 30)
+    uniformBtn.Position = UDim2.new(0.3, 0, 0.7, 0)
+    uniformBtn.Text = "整体放大"
+    uniformBtn.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+    uniformBtn.BackgroundTransparency = 0.4
+    uniformBtn.TextColor3 = Color3.new(1, 1, 1)
+    uniformBtn.Parent = currentPanel
+    uniformBtn.MouseButton1Click:Connect(function()
+        recordHistory("scale", {part = selectedPart, oldSize = selectedPart.Size})
+        selectedPart.Size = selectedPart.Size * Vector3.new(1.1,1.1,1.1)
+    end)
+end)
+
+-- 11. 撤销
+createButton("撤销", Color3.new(0.3, 0.3, 0.3), 0.5, function()
+    if historyIndex < 1 then return end
+    local action = history[historyIndex]
+    if action.action == "move" then
+        action.data.part.Position = action.data.oldPos
+    elseif action.action == "delete" then
+        action.data.clone.Parent = workspace
+        selectedPart = action.data.clone
+        showSelectionBox(selectedPart)
+    elseif action.action == "color" then
+        action.data.part.BrickColor = action.data.oldColor
+    elseif action.action == "rotate" then
+        action.data.part.Rotation = action.data.oldRot
+    elseif action.action == "anchor" then
+        action.data.part.Anchored = action.data.oldAnchor
+    elseif action.action == "text" then
+        action.data.sg:Destroy()
+    elseif action.action == "brightness" then
+        action.data.part.Material = action.data.oldMat
+        action.data.part.Color = action.data.oldColor
+    elseif action.action == "scale" then
+        action.data.part.Size = action.data.oldSize
+    elseif action.action == "effect" then
+        action.data.emitter:Destroy()
+    end
+    historyIndex = historyIndex - 1
+end)
+
+-- 12. 调节方块类型
+createButton("调节方块类型", Color3.new(0.2, 0.3, 0.6), 0.55, function()
+    if not selectedPart then return end
+    currentPanel = Instance.new("Frame")
+    currentPanel.Size = UDim2.new(0, 200, 0, 140)
+    currentPanel.Position = UDim2.new(0.15, 0, 0.2, 0)
+    currentPanel.BackgroundColor3 = Color3.new(0, 0, 0)
+    currentPanel.BackgroundTransparency = 0.3
+    currentPanel.Parent = ScreenGui
+    makeDraggable(currentPanel)
+
+    local types = {
+        {"Part", "Part"},
+        {"WedgePart", "WedgePart"},
+        {"CornerWedgePart", "CornerWedgePart"},
+        {"SpherePart", "SpherePart"},
+        {"CylinderPart", "CylinderPart"},
+        {"MeshPart", "MeshPart"},
+        {"TrussPart", "TrussPart"},
+        {"UnionOperation", "UnionOperation"}
+    }
+    for i, t in ipairs(types) do
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(0.45, 0, 0, 25)
+        btn.Position = UDim2.new(0.02 + ((i-1)%2)*0.5, 0, 0.05 + math.floor((i-1)/2)*0.18, 0)
+        btn.Text = t[1]
+        btn.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+        btn.BackgroundTransparency = 0.4
+        btn.TextColor3 = Color3.new(1, 1, 1)
+        btn.Parent = currentPanel
+        btn.MouseButton1Click:Connect(function()
+            local newPart = Instance.new(t[2])
+            newPart.Size = selectedPart.Size
+            newPart.Position = selectedPart.Position
+            newPart.Rotation = selectedPart.Rotation
+            newPart.BrickColor = selectedPart.BrickColor
+            newPart.Anchored = selectedPart.Anchored
+            newPart.CanCollide = selectedPart.CanCollide
+            newPart.Parent = selectedPart.Parent
+            recordHistory("changeType", {old = selectedPart, new = newPart})
+            selectedPart:Destroy()
+            selectedPart = newPart
+            showSelectionBox(selectedPart)
+            closeCurrentPanel()
+        end)
+    end
+end)
+
+-- 13. 调节是否穿入
+createButton("调节是否穿入", Color3.new(0.3, 0.5, 0.5), 0.6, function()
+    if not selectedPart then return end
+    recordHistory("collide", {part = selectedPart, old = selectedPart.CanCollide})
+    selectedPart.CanCollide = not selectedPart.CanCollide
+    local tip = Instance.new("TextLabel")
+    tip.Size = UDim2.new(0, 120, 0, 20)
+    tip.Position = UDim2.new(0.45, 0, 0.05, 0)
+    tip.Text = selectedPart.CanCollide and "可碰撞" or "可穿入"
+    tip.TextColor3 = Color3.new(1, 1, 1)
+    tip.BackgroundColor3 = Color3.new(0, 0, 0)
+    tip.BackgroundTransparency = 0.3
+    tip.Parent = ScreenGui
+    Debris:AddItem(tip, 1)
+end)
+
+-- 14. 添加特效
+createButton("添加特效", Color3.new(0.5, 0.3, 0.6), 0.65, function()
+    if not selectedPart then return end
+    currentPanel = Instance.new("Frame")
+    currentPanel.Size = UDim2.new(0, 350, 0, 300)
+    currentPanel.Position = UDim2.new(0.15, 0, 0.2, 0)
+    currentPanel.BackgroundColor3 = Color3.new(0, 0, 0)
+    currentPanel.BackgroundTransparency = 0.3
+    currentPanel.Parent = ScreenGui
+    makeDraggable(currentPanel)
+
+    local Title = Instance.new("TextLabel")
+    Title.Size = UDim2.new(1,0,0,25)
+    Title.Text = "特效库"
+    Title.TextColor3 = Color3.new(1, 1, 1)
+    Title.BackgroundTransparency = 1
+    Title.TextScaled = true
+    Title.Parent = currentPanel
+
+    local effects = {
+        {name = "火焰", asset = "rbxassetid://154966223"},
+        {name = "大型火焰", asset = "rbxassetid://154966490"},
+        {name = "爆炸", asset = "rbxassetid://13246749"},
+        {name = "烟雾爆炸", asset = "rbxassetid://13246761"},
+        {name = "环形火焰", asset = "rbxassetid://13246773"},
+        {name = "烟雾", asset = "rbxassetid://154966261"},
+        {name = "浓烟雾", asset = "rbxassetid://154966277"},
+        {name = "蒸汽", asset = "rbxassetid://154966331"},
+        {name = "冷烟", asset = "rbxassetid://154966347"},
+        {name = "火花", asset = "rbxassetid://13246808"},
+        {name = "小火花", asset = "rbxassetid://13246814"},
+        {name = "电弧", asset = "rbxassetid://13246826"},
+        {name = "静电", asset = "rbxassetid://13246832"},
+        {name = "等离子", asset = "rbxassetid://13246844"},
+        {name = "魔法尘", asset = "rbxassetid://13246862"},
+        {name = "光环", asset = "rbxassetid://13246874"},
+        {name = "星星", asset = "rbxassetid://13246886"},
+        {name = "心形", asset = "rbxassetid://13246898"},
+        {name = "雪花", asset = "rbxassetid://13246910"},
+        {name = "下雨", asset = "rbxassetid://13246922"},
+        {name = "下雪", asset = "rbxassetid://13246934"},
+        {name = "落叶", asset = "rbxassetid://13246946"},
+        {name = "泡泡", asset = "rbxassetid://13246958"},
+        {name = "粉尘", asset = "rbxassetid://13246970"},
+    }
+
+    for i, eff in ipairs(effects) do
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(0.22,0,0,25)
+        btn.Position = UDim2.new(0.02 + ((i-1)%4)*0.24,0, 0.1 + math.floor((i-1)/4)*0.08,0)
+        btn.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+        btn.BackgroundTransparency = 0.4
+        btn.Text = eff.name
+        btn.TextColor3 = Color3.new(1, 1, 1)
+        btn.TextScaled = true
+        btn.Parent = currentPanel
+
+        btn.MouseButton1Click:Connect(function()
+            for _,c in ipairs(selectedPart:GetChildren()) do
+                if c:IsA("ParticleEmitter") and c.Name == "F3XEffect" then c:Destroy() end
+            end
+            local e = Instance.new("ParticleEmitter")
+            e.Name = "F3XEffect"
+            e.Texture = eff.asset
+            e.Rate = 50
+            e.Lifetime = NumberRange.new(1,2)
+            e.Speed = NumberRange.new(2,5)
+            e.SpreadAngle = Vector2.new(360,360)
+            e.Rotation = NumberRange.new(0,360)
+            e.Parent = selectedPart
+            recordHistory("effect", {part = selectedPart, emitter = e})
+        end)
+    end
+
+    local clearBtn = Instance.new("TextButton")
+    clearBtn.Size = UDim2.new(0.2,0,0,25)
+    clearBtn.Position = UDim2.new(0.4,0,0.9,0)
+    clearBtn.BackgroundColor3 = Color3.new(0.6, 0.2, 0.2)
+    clearBtn.BackgroundTransparency = 0.4
+    clearBtn.Text = "清除特效"
+    clearBtn.TextColor3 = Color3.new(1, 1, 1)
+    clearBtn.Parent = currentPanel
+    clearBtn.MouseButton1Click:Connect(function()
+        for _,c in ipairs(selectedPart:GetChildren()) do
+            if c:IsA("ParticleEmitter") and c.Name == "F3XEffect" then c:Destroy() end
+        end
+    end)
+end)
+
+-- 批量操作（选择同类型方块并统一修改颜色）
+createButton("批量改色", Color3.new(0.8,0.6,0.2), 0.75, function()
+    if not selectedPart then return end
+
+    local targetType = selectedPart.ClassName
+    local parts = {}
+
+    -- 收集同类型方块
+    for _, p in ipairs(workspace:GetDescendants()) do
+        if p:IsA("BasePart") and p.ClassName == targetType then
+            table.insert(parts, p)
+        end
+    end
+
+    -- 颜色选择面板
+    local panel = Instance.new("Frame")
+    panel.Size = UDim2.new(0, 200, 0, 100)
+    panel.Position = UDim2.new(0.15,0,0.2,0)
+    panel.BackgroundColor3 = Color3.new(0,0,0)
+    panel.BackgroundTransparency = 0.7
+    panel.Parent = ScreenGui
+    makeDraggable(panel)
+
+    local colors = {
+        Color3.new(1,0,0), Color3.new(0,1,0), Color3.new(0,0,1), Color3.new(1,1,0)
+    }
+
+    for i, c in ipairs(colors) do
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(0.2,0,0,40)
+        btn.Position = UDim2.new((i-1)*0.25,0,0.2,0)
+        btn.BackgroundColor3 = c
+        btn.Text = ""
+        btn.Parent = panel
+        btn.MouseButton1Click:Connect(function()
+            for _, p in ipairs(parts) do
+                p.BrickColor = BrickColor.new(c)
+            end
+            panel:Destroy()
+        end)
+    end
+end)
+
+-- 15. 清空选择
+createButton("清空选择", Color3.new(0.4, 0.4, 0.4), 0.7, function()
+    selectedPart = nil
+    showSelectionBox(nil)
+    closeCurrentPanel()
+end)
