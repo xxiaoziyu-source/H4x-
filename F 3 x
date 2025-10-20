@@ -389,6 +389,98 @@ createButton("设置亮度", Color3.new(0.4, 0.4, 0.4), 0.4, function()
     end)
 end)
 
+-- 16. 脚下生成多图形方块（10种形状可选）
+createButton("脚下生成方块", Color3.new(0.2, 0.6, 0.6), 0.8, function()
+    currentPanel = Instance.new("Frame")
+    currentPanel.Size = UDim2.new(0, 300, 0, 180)
+    currentPanel.Position = UDim2.new(0.15, 0, 0.2, 0)
+    currentPanel.BackgroundColor3 = Color3.new(0, 0, 0)
+    currentPanel.BackgroundTransparency = 0.3
+    currentPanel.Parent = ScreenGui
+    makeDraggable(currentPanel)
+
+    -- 标题
+    local panelTitle = Instance.new("TextLabel")
+    panelTitle.Size = UDim2.new(1, 0, 0, 25)
+    panelTitle.Text = "选择图形（生成在脚下）"
+    panelTitle.TextColor3 = Color3.new(1, 1, 1)
+    panelTitle.BackgroundTransparency = 1
+    panelTitle.TextScaled = true
+    panelTitle.Parent = currentPanel
+
+    -- 10种方块形状（含常见基础形状+特殊形状）
+    local partTypes = {
+        {"正方体", "Part", Vector3.new(4, 2, 4)},  -- 标准正方体
+        {"长方体", "Part", Vector3.new(6, 1, 3)},  -- 扁平长方体
+        {"球体", "SpherePart", Vector3.new(3, 3, 3)},  -- 球体
+        {"圆柱体", "CylinderPart", Vector3.new(3, 2, 3)},  -- 圆柱体
+        {"楔体", "WedgePart", Vector3.new(4, 2, 4)},  -- 斜面楔体
+        {"角楔体", "CornerWedgePart", Vector3.new(4, 2, 4)},  -- 直角楔体
+        {"圆台", "MeshPart", Vector3.new(4, 2, 4)},  -- 圆台（Mesh实现）
+        {"三角柱", "MeshPart", Vector3.new(4, 2, 4)},  -- 三角柱（Mesh实现）
+        {"圆环", "MeshPart", Vector3.new(5, 1, 5)},  -- 圆环（Mesh实现）
+        {"八面体", "MeshPart", Vector3.new(3, 3, 3)}   -- 八面体（Mesh实现）
+    }
+
+    -- 生成按钮（3列3行排列，最后1个占2列）
+    for i, typeData in ipairs(partTypes) do
+        local btn = Instance.new("TextButton")
+        -- 按钮位置计算（适配10个按钮的排版）
+        local row = math.floor((i-1)/3)
+        local col = (i-1)%3
+        btn.Size = UDim2.new(i == 10 and 0.65 or 0.3, 0, 0, 30)  -- 第10个按钮占2列
+        btn.Position = UDim2.new(0.02 + col*0.32, 0, 0.15 + row*0.2, 0)
+        btn.Text = typeData[1]
+        btn.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+        btn.BackgroundTransparency = 0.4
+        btn.TextColor3 = Color3.new(1, 1, 1)
+        btn.TextScaled = true
+        btn.Parent = currentPanel
+
+        btn.MouseButton1Click:Connect(function()
+            -- 获取玩家脚下位置（避免生成在地面下）
+            local character = Player.Character
+            if not character then return end
+            local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+            if not humanoidRootPart then return end
+            local spawnPos = humanoidRootPart.Position - Vector3.new(0, humanoidRootPart.Size.Y/2 + typeData[3].Y/2, 0)
+
+            -- 创建对应形状的方块
+            local newPart = Instance.new(typeData[2])
+            newPart.Size = typeData[3]
+            newPart.Position = spawnPos
+            newPart.BrickColor = BrickColor.new(Color3.new(0.5, 0.7, 1))  -- 默认浅蓝色
+            newPart.Anchored = true
+            newPart.CanCollide = true
+            newPart.Parent = workspace
+
+            -- 为特殊Mesh形状添加Mesh
+            if typeData[2] == "MeshPart" then
+                local mesh = Instance.new("SpecialMesh")
+                if typeData[1] == "圆台" then
+                    mesh.MeshType = Enum.MeshType.Cylinder
+                    mesh.Scale = Vector3.new(1, 1, 0.5)  -- 缩放成圆台
+                elseif typeData[1] == "三角柱" then
+                    mesh.MeshType = Enum.MeshType.Wedge
+                    mesh.Scale = Vector3.new(1, 1, 1)
+                elseif typeData[1] == "圆环" then
+                    mesh.MeshType = Enum.MeshType.Torus
+                    mesh.InnerRadius = 1
+                    mesh.OuterRadius = 2.5
+                elseif typeData[1] == "八面体" then
+                    mesh.MeshType = Enum.MeshType.Icosahedron
+                    mesh.Scale = Vector3.new(1, 1, 1)
+                end
+                mesh.Parent = newPart
+            end
+
+            -- 记录历史（支持撤销）
+            recordHistory("spawn", {part = newPart})
+            closeCurrentPanel()
+        end)
+    end
+end)
+
 -- 10. 缩放方块（6方向）
 createButton("缩放方块", Color3.new(0.4, 0.6, 0.6), 0.45, function()
     if not selectedPart then return end
