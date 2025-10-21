@@ -757,3 +757,71 @@ createButton("清空选择", Color3.new(0.4, 0.4, 0.4), 0.7, function()
     showSelectionBox(nil)
     closeCurrentPanel()
 end)
+-- 你的原始脚本内容（所有按钮、功能、选中逻辑等）
+...
+
+-- 把上面那段补丁代码粘贴到这里（脚本末尾）
+do
+    -- 找到你现在的主面板（假设它的 Name 是 "F3XTool" 或 "MainFrame"）
+    local UI = game.Players.LocalPlayer.PlayerGui:FindFirstChild("F3XTool")
+    local MainFrame = UI and UI:FindFirstChild("MainFrame")
+    if not MainFrame then
+        -- 如果上面名字不对，用这种方式按类型找
+        for _, sg in ipairs(game.Players.LocalPlayer.PlayerGui:GetChildren()) do
+            if sg:IsA("ScreenGui") then
+                for _, f in ipairs(sg:GetChildren()) do
+                    if f:IsA("Frame") and f.BackgroundTransparency < 1 and f.BorderSizePixel > 0 then
+                        MainFrame = f
+                        break
+                    end
+                end
+                if MainFrame then break end
+            end
+        end
+    end
+
+    if MainFrame then
+        -- 记录原始尺寸
+        local originalSize = MainFrame.Size
+
+        -- 默认缩小尺寸
+        local smallSize = UDim2.new(0, 140, 0, 400)
+
+        -- 改小
+        MainFrame.Size = smallSize
+
+        -- 找到标题栏（通常是第一个 Frame 子对象）
+        local TitleBar = nil
+        for _, child in ipairs(MainFrame:GetChildren()) do
+            if child:IsA("Frame") and child.BackgroundColor3 ~= Color3.new(0,0,0) then
+                TitleBar = child
+                break
+            end
+        end
+
+        if TitleBar then
+            -- 创建"放大/缩小"按钮
+            local ResizeBtn = Instance.new("TextButton")
+            ResizeBtn.Name = "ResizeButton"
+            ResizeBtn.Size = UDim2.new(0, 40, 0, 20)
+            ResizeBtn.Position = UDim2.new(1, -45, 0, 5)
+            ResizeBtn.Text = "放大"
+            ResizeBtn.TextSize = 12
+            ResizeBtn.BackgroundColor3 = Color3.new(0.9, 0.9, 0.9)
+            ResizeBtn.TextColor3 = Color3.new(0, 0, 0)
+            ResizeBtn.Parent = TitleBar
+
+            local isSmall = true
+            ResizeBtn.MouseButton1Click:Connect(function()
+                isSmall = not isSmall
+                if isSmall then
+                    MainFrame.Size = smallSize
+                    ResizeBtn.Text = "放大"
+                else
+                    MainFrame.Size = originalSize
+                    ResizeBtn.Text = "缩小"
+                end
+            end)
+        end
+    end
+end
