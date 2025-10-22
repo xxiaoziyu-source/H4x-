@@ -67,7 +67,31 @@ local Translations = {
     ["Old Flashlight"] = "旧手电筒", ["Strong Flashlight"] = "强力手电筒", ["Bunny Foot"] = "兔子脚",
     ["Wolf Pelt"] = "狼皮", ["Bear Pelt"] = "熊皮", ["Alpha Wolf Pelt"] = "阿尔法狼皮",
     ["Arctic Fox Pelt"] = "北极狐皮", ["Polar Bear Pelt"] = "北极熊皮", ["Mammoth Tusk"] = "猛犸象牙",
-    ["Anti Void"] = "防掉落虚空", ["AntiAfk"] = "防挂机", ["No Clip"] = "穿墙"
+    ["Anti Void"] = "防掉落虚空", ["AntiAfk"] = "防挂机", ["No Clip"] = "穿墙",
+    ["Key System"] = "密钥系统",
+    ["Enter Key"] = "输入密钥",
+    ["Check Key"] = "检查密钥",
+   ["Get Key"] = "获取密钥",
+  ["Get Perm Key"] = "获取永久密钥",
+ ["Supported Gam"] = "支持的游戏",
+["This tab is empty"] = "此标签页为空",
+["H4xScript Notice"] = "H4x脚本通知",
+["The Game has added range check for 杀戮光环/ Auto Cut Tree so it wont work as before!!"] = "游戏已为杀戮光环/自动砍树添加范围检测，因此其效果将不如以往！！",
+["I understand!"] = "我明白了！",
+["Stupid 99Nights Developers"] = "愚蠢的99夜开发者",
+["H4xScripts"] = "H4x脚本",
+["Freemium v2.2.7"] = "免费增值版 v2.2.7",
+["OO汉化"] = "OO汉化",
+["Fish / Tame"] = "钓鱼/驯服",
+["自动Taming ( turn off stun )"] = "自动驯服（关闭眩晕）",
+["自动点击钓鱼"] = "自动点击钓鱼",
+["自动Feed"] = "自动喂食",
+["Auto Heal Teammates (Hold 绷带)"] = "自动治疗队友（按住绷带）",
+["Tp To Enimies"] = "传送至敌人",
+["Show Range ( range added by game )"] = "显示范围（游戏新增的范围）",
+["碰撞箱扩展器"] = "碰撞箱扩展器",
+["扩展碰撞箱"] = "扩展碰撞箱",
+["Stun enimies (狼,Tsuk,etc)"] = "眩晕敌人（狼、Tsuk等）"
 }
 
 local function translateText(text)
