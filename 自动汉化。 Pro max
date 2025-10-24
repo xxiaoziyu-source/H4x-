@@ -1,0 +1,241 @@
+local Translations = {
+   --["这里填要替换的英文"] = "这里填中文",
+    ["Plot Painter"] = "地块绘制器",
+    ["Your plot painted with Zenikaze style!"] = "你的地块已使用Zenikaze风格绘制！",
+    ["Zenikaze Hub"] = "Zenikaze中心",
+    ["Script loaded! Configure keybinds in Config tab"] = "脚本已加载！在设置标签页配置按键绑定",
+    ["Made by ZenithExility"] = "由ZenithExility制作",
+    ["Stealer"] = "窃取功能",
+    ["Helper"] = "辅助功能",
+    ["Config"] = "设置",
+    ["Private"] = "隐私",
+    ["TP Highest"] = "传送至最高处",
+    ["Desync Player"] = "玩家失步",
+    ["Auto Delivery"] = "自动交付",
+    ["3rd Floor"] = "三楼",
+    ["Float V1"] = "悬浮V1",
+    ["Float V2"] = "悬浮V2",
+    ["Semi Invisible"] = "半隐身",
+    ["Steal Best"] = "窃取最优",
+    ["Jump Boost"] = "跳跃增强",
+    ["Speed Control"] = "速度控制",
+    ["Infinity Jump"] = "无限跳跃",
+    ["Aimbot Helper"] = "自瞄辅助",
+    ["ESP Players"] = "玩家透视",
+    ["ESP Brainrot Gods"] = "Brainrot之神透视",
+    ["ESP Brainrot Secrets"] = "Brainrot秘密透视",
+    ["FPS Immune"] = "帧率免疫",
+    ["Base Opacity"] = "基地透明度",
+    ["ESP Base Time"] = "基地时间透视",
+    ["ESP Best"] = "最优透视",
+    ["Fly Grapple"] = "飞行钩爪",
+    ["Rejoin Server"] = "重新加入服务器",
+    ["Server Hop (auto empty)"] = "服务器跳转（自动空服）",
+    ["Job ID"] = "任务ID",
+    ["Enter Job ID..."] = "输入任务ID...",
+    ["Join by Job ID"] = "通过任务ID加入",
+    ["Copy Current Job ID"] = "复制当前任务ID",
+    ["Mobile Keybinds Config"] = "移动端按键配置",
+    ["Join Discord (copy link)"] = "加入Discord（复制链接）",
+    ["Clear Settings"] = "清除设置",
+    ["Protection Status"] = "保护状态",
+    ["Remove Notifications"] = "移除通知",
+    ["FPS Booster"] = "帧率增强器",
+    ["CREDITS"] = "鸣谢",
+    ["ZENIKAZE HUB TEAM"] = "Zenikaze中心团队",
+    ["ZenithExility - Main Developer"] = "ZenithExility - 主开发者",
+    ["LKZ - Co-Developer"] = "LKZ - 联合开发者",
+    ["FaZe - Marketing & Design"] = "FaZe - 营销与设计",
+    ["Maicon - Marketing"] = "Maicon - 营销",
+    ["Mgmfz - Technical Support"] = "Mgmfz - 技术支持",
+    ["Thank you for using Zenikaze Hub!"] = "感谢使用Zenikaze中心！",
+    ["OFF"] = "关闭",
+    -- 界面通用
+["Fish It"] = "钓鱼助手",
+["by Mallo | discord.gg/H4xScripts"] = "作者：Mallo |  discord.gg/H4xScripts",
+["Freemium v1.0.0"] = "免费版 v1.0.0",
+["Search"] = "搜索",
+["Home"] = "主页",
+["Main"] = "主功能",
+["Misc"] = "杂项",
+["Teleport"] = "传送",
+["Visuals"] = "视觉",
+["LocalPlayer"] = "本地玩家",
+["Settings"] = "设置",
+["Anonymous"] = "匿名",
+["H4xScripts #255k!"] = "H4xScripts #255k!",
+["Member Count"] = "成员数",
+["Online Count"] = "在线数",
+["Join Discord"] = "加入Discord",
+["Stats"] = "状态",
+["Game"] = "游戏",
+["Rank"] = "等级",
+["FPS"] = "帧率",
+["Ping"] = "延迟",
+["Script Executed"] = "脚本已执行",
+
+-- 主功能（Main）
+["Auto Fish"] = "自动钓鱼",
+["Cancle Fishing"] = "取消钓鱼",
+["Auto Teleport To Events"] = "自动传送至活动",
+["Select Event"] = "选择活动",
+["Shark Hunt"] = "猎鲨活动",
+["Auto Teleport"] = "自动传送",
+["Auto Sell"] = "自动出售",
+["Auto Sell Delay"] = "自动出售延迟",
+["Sell All Items"] = "出售所有物品",
+["Sell Held Items"] = "出售手持物品",
+["Buy Rods"] = "购买鱼竿",
+["infinite oxygen"] = "无限氧气",
+["Equip Oxygen Tank"] = "装备氧气瓶",
+["Select Rod"] = "选择鱼竿",
+["Buy Selected Rod"] = "购买选中的鱼竿",
+["Baits"] = "鱼饵",
+["Select Bait"] = "选择鱼饵",
+["Buy Bait"] = "购买鱼饵",
+["Boats"] = "船只",
+["Select Boat"] = "选择船只",
+["Buy Boat"] = "购买船只",
+
+-- 传送（Teleport）
+["Saved Locations"] = "已保存位置",
+["Island Teleport"] = "岛屿传送",
+["Misc Teleport"] = "杂项传送",
+["NPC Teleport"] = "NPC传送",
+["Shops Teleport"] = "商店传送",
+["Jungle"] = "丛林",
+
+-- 视觉（Visuals）
+["Fishing Radar"] = "钓鱼雷达",
+
+-- 本地玩家（LocalPlayer）
+["Anti Afk"] = "防挂机",
+["Feedback"] = "反馈",
+["Freeze Character"] = "冻结角色",
+["Movement"] = "移动",
+["Player Speed"] = "玩家速度",
+["Player Jump"] = "玩家跳跃",
+["Enable Speed"] = "启用加速",
+["Infinite Jump"] = "无限跳跃",
+["Noclip"] = "穿墙模式",
+["Fly"] = "飞行模式",
+["Fly Speed"] = "飞行速度",
+["Spin"] = "旋转",
+["Spin Speed"] = "旋转速度",
+["Enable Spin"] = "启用旋转"
+}
+
+local function translateText(text)
+    if not text or type(text) ~= "string" then return text end
+    
+    if Translations[text] then
+        return Translations[text]
+    end
+    
+    for en, cn in pairs(Translations) do
+        if text:find(en) then
+            return text:gsub(en, cn)
+        end
+    end
+    
+    return text
+end
+
+local function setupTranslationEngine()
+    local success, err = pcall(function()
+        local oldIndex = getrawmetatable(game).__newindex
+        setreadonly(getrawmetatable(game), false)
+        
+        getrawmetatable(game).__newindex = newcclosure(function(t, k, v)
+            if (t:IsA("TextLabel") or t:IsA("TextButton") or t:IsA("TextBox")) and k == "Text" then
+                v = translateText(tostring(v))
+            end
+            return oldIndex(t, k, v)
+        end)
+        
+        setreadonly(getrawmetatable(game), true)
+    end)
+    
+    if not success then
+        warn("元表劫持失败:", err)
+       
+        local translated = {}
+        local function scanAndTranslate()
+            for _, gui in ipairs(game:GetService("CoreGui"):GetDescendants()) do
+                if (gui:IsA("TextLabel") or gui:IsA("TextButton") or gui:IsA("TextBox")) and not translated[gui] then
+                    pcall(function()
+                        local text = gui.Text
+                        if text and text ~= "" then
+                            local translatedText = translateText(text)
+                            if translatedText ~= text then
+                                gui.Text = translatedText
+                                translated[gui] = true
+                            end
+                        end
+                    end)
+                end
+            end
+            
+            local player = game:GetService("Players").LocalPlayer
+            if player and player:FindFirstChild("PlayerGui") then
+                for _, gui in ipairs(player.PlayerGui:GetDescendants()) do
+                    if (gui:IsA("TextLabel") or gui:IsA("TextButton") or gui:IsA("TextBox")) and not translated[gui] then
+                        pcall(function()
+                            local text = gui.Text
+                            if text and text ~= "" then
+                                local translatedText = translateText(text)
+                                if translatedText ~= text then
+                                    gui.Text = translatedText
+                                    translated[gui] = true
+                                end
+                            end
+                        end)
+                    end
+                end
+            end
+        end
+        
+        local function setupDescendantListener(parent)
+            parent.DescendantAdded:Connect(function(descendant)
+                if descendant:IsA("TextLabel") or descendant:IsA("TextButton") or descendant:IsA("TextBox") then
+                    task.wait(0.1)
+                    pcall(function()
+                        local text = descendant.Text
+                        if text and text ~= "" then
+                            local translatedText = translateText(text)
+                            if translatedText ~= text then
+                                descendant.Text = translatedText
+                            end
+                        end
+                    end)
+                end
+            end)
+        end
+        
+        pcall(setupDescendantListener, game:GetService("CoreGui"))
+        local player = game:GetService("Players").LocalPlayer
+        if player and player:FindFirstChild("PlayerGui") then
+            pcall(setupDescendantListener, player.PlayerGui)
+        end
+        
+        while true do
+            scanAndTranslate()
+            task.wait(3)
+        end
+    end
+end
+
+task.wait(2)
+
+setupTranslationEngine()
+
+local success, err = pcall(function()
+--这下面填加载外部脚本
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ZenithExility/ZenikazeHub/refs/heads/main/ZenikazeV3.9"))()
+
+
+end)
+
+if not success then
+    warn("加载失败:", err)
+end
