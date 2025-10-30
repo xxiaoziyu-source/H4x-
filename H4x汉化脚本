@@ -139,7 +139,7 @@ local Translations = {
     ["Search"] = "搜索",
     ["Halloween"] = "万圣节",
     ["Full Screen Translation"] = "全屏翻译",
-    ["Partial Translation"] = "局部翻译"1
+    ["Partial Translation"] = "局部翻译"
 }
 
 local function translateText(text)
