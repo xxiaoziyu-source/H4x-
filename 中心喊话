@@ -1,0 +1,364 @@
+local Translations = {
+   --["这里填要替换的英文"] = "这里填中文",
+   ["VERSION: FREEMIUM"] = "○○汉化 版本：免费高级版"
+    ["Auto Fishing"] = "自动钓鱼",
+    ["Fishing Detector Timer"] = "钓鱼检测器计时器",
+    ["Enter timer (10-25)"] = "输入计时器（10-25）",
+    ["Fishing Detector"] = "钓鱼检测器",
+    ["Detects if fishing is stuck and respawns if needed"] = "检测钓鱼是否卡住，必要时重新生成",
+    ["Instant Fishing V1"] = "即时钓鱼 V1",
+    ["Delay: Astral : 2 second"] = "延迟：Astral：2秒",
+    ["If ur rod better than astral then u can do below 2 second"] = "若你的鱼竿优于Astral，可设置低于2秒延迟",
+    ["Instant Fishing V1"] = "即时钓鱼 V1",
+    ["Automatically fish with bypass"] = "自动绕过钓鱼",
+    ["Fishing Delay"] = "钓鱼延迟",
+    ["Enter delay (2.0-5)"] = "输入延迟（2.0-5）",
+    ["Instant Fishing V2"] = "即时钓鱼 V2",
+    ["Advanced instant fishing with better detection"] = "具有更好检测的高级即时钓鱼",
+    ["Instant Fishing V2"] = "即时钓鱼 V2",
+    ["SyxHub - Fish It"] = "SyxHub - 钓鱼",
+    ["VERSION: FREEMIUM"] = "版本：免费高级版",
+    ["Info"] = "信息",
+    ["Auto Farm"] = "自动农场",
+    ["Change Rod Stats"] = "更改鱼竿属性",
+    ["Teleport"] = "传送",
+    ["Spawn Boat"] = "生成船只",
+    ["Shop"] = "商店",
+    ["Quest"] = "任务",
+    ["Enchant"] = "附魔",
+    ["User"] = "用户",
+    ["Settings"] = "设置",
+    ["Welcome to SyxHub"] = "欢迎来到 SyxHub",
+    ["Version Game: Fish it."] = "游戏版本：钓鱼",
+    ["Join Our Discord"] = "加入我们的 Discord",
+    ["Click to copy our Discord invite link."] = "点击复制我们的 Discord 邀请链接",
+    ["Legit Fishing"] = "合法钓鱼",
+    ["More realistic fishing with optimized speed"] = "更逼真的钓鱼，优化速度",
+    ["Auto Instant Complete Fishing"] = "自动即时完成钓鱼",
+    ["Automatically completes fishing instantly"] = "自动即时完成钓鱼",
+    ["BETA FEATURES"] = "测试功能",
+    ["Experimental features that may have bugs. Use with caution."] = "实验性功能可能存在漏洞，使用时请谨慎",
+    ["Blatant Fishing Delay"] = "明显钓鱼延迟",
+    ["Enter delay (0.1-5"] = "输入延迟（0.1-5",
+    ["Blatant Fishing"] = "明显钓鱼",
+    ["Experimental fishing method with adjustable delay"] = "可调节延迟的实验性钓鱼方法",
+    ["Misc AutoFarm"] = "杂项自动农场",
+    ["Auto Equip Rod"] = "自动装备鱼竿",
+    ["Automatically equips your fishing rod"] = "自动装备你的鱼竿",
+    ["Fishing Radar"] = "钓鱼雷达",
+    ["Bypass Fishing Radar"] = "绕过钓鱼雷达",
+    ["Diving Gear"] = "潜水装备",
+    ["Using diving gear without buying it"] = "无需购买即可使用潜水装备",
+    ["Oxygen Bypass"] = "氧气绕过",
+    ["Infinite oxygen underwater"] = "水下无限氧气",
+    ["Auto Sell"] = "自动出售",
+    ["Please be careful when using auto sell and have set auto sell in backpack"] = "使用自动出售功能时请谨慎，需先在背包中开启自动出售设置",
+    ["Sell All Fish"] = "出售所有鱼",
+    ["Click to sell all your items instantly"] = "点击立即出售所有物品",
+    ["Auto Sell"] = "自动出售",
+    ["Automatically sell all Fish / Warning"] = "自动出售所有鱼 / 警告",
+    ["Anti Kick"] = "防踢",
+    ["Anti Kick"] = "防踢",
+    ["Rod Modifier"] = "鱼竿修改器",
+    ["Select a Rod to apply max stats."] = "选择一根鱼竿以应用最大属性",
+    ["Select Rod"] = "选择鱼竿",
+    ["Starter Rod"] = "初始鱼竿",
+    ["Apply Max Stats"] = "应用最大属性",
+    ["Lava Rod"] = "熔岩鱼竿",
+    ["Luck Rod"] = "幸运鱼竿",
+    ["Carbon Rod"] = "碳鱼竿",
+    ["Grass Rod"] = "草鱼竿",
+    ["Demascus Rod"] = "大马士革鱼竿",
+    ["Ice Rod"] = "冰鱼竿",
+    ["Lucky Rod"] = "幸运鱼竿",
+    ["Midnight Rod"] = "午夜鱼竿",
+    ["Steampunk Rod"] = "蒸汽朋克鱼竿",
+    ["Chrome Rod"] = "铬鱼竿",
+    ["Astral Rod"] = "星界鱼竿",
+    ["Ares Rod"] = "阿瑞斯鱼竿",
+    ["Angler Rod"] = "垂钓者鱼竿",
+    ["Ghostfinn Rod"] = "幽灵鳍鱼竿",
+    ["Island Teleport"] = "岛屿传送",
+    ["Select Location"] = "选择位置",
+    ["Kohana..."] = "Kohana...",
+    ["Teleport To Location"] = "传送到位置",
+    ["Teleport To Game Event"] = "传送到游戏活动",
+    ["Select Event"] = "选择活动",
+    ["--"] = "--",
+    ["Teleport to Event"] = "传送到活动",
+    ["Teleport To NPC Locations"] = "传送到NPC位置",
+    ["Select NPC"] = "选择NPC",
+    ["Lava..."] = "Lava...",
+    ["Teleport To NPC"] = "传送到NPC",
+    ["Player Teleport"] = "玩家传送",
+    ["Kohana Volcano"] = "Kohana火山",
+    ["Treasure Room"] = "宝藏室",
+    ["Crater Island"] = "火山口岛",
+    ["Mount Hallow"] = "空心山",
+    ["Sacred Temple"] = "神圣寺庙",
+    ["Lost Isle"] = "失落岛",
+    ["Enchant Room"] = "附魔室",
+    ["Weather Machine"] = "天气机器",
+    ["Esotric Islands"] = "神秘岛屿",
+    ["Admin Spot"] = "管理员地点",
+    ["Underground Cellar"] = "地下地窖",
+    ["Arrow Artifact"] = "箭矢神器",
+    ["Sisyphus Statue"] = "西西弗斯雕像",
+    ["Kohana"] = "Kohana",
+    ["Diamond Artifact"] = "钻石神器",
+    ["Hourglass Diamond Artifact"] = "沙漏钻石神器",
+    ["Coral Reefs"] = "珊瑚礁",
+    ["Crescent Artifact"] = "月牙神器",
+    ["Ancient Jungle"] = "古老丛林",
+    ["Second Enchant"] = "二次附魔",
+    ["Tropical Grove"] = "热带树林",
+    ["Fisherman Island"] = "渔夫岛",
+    ["Shark Hunt #1"] = "鲨鱼狩猎 #1",
+    ["Shark Hunt #2"] = "鲨鱼狩猎 #2",
+    ["Shark Hunt #3"] = "鲨鱼狩猎 #3",
+    ["Shark Hunt #4"] = "鲨鱼狩猎 #4",
+    ["Ghost Shark Hunt #1"] = "幽灵鲨鱼狩猎 #1",
+    ["Ghost Shark Hunt #2"] = "幽灵鲨鱼狩猎 #2",
+    ["Ghost Shark Hunt #3"] = "幽灵鲨鱼狩猎 #3",
+    ["Sparkling Cove #1"] = "闪耀海湾 #1",
+    ["Worm Hunt #1"] = "蠕虫狩猎 #1",
+    ["Worm Hunt #2"] = "蠕虫狩猎 #2",
+    ["Worm Hunt #3"] = "蠕虫狩猎 #3",
+    ["Admin - Shocked #1"] = "管理员 - 电击 #1",
+    ["Admin - Blood Moon #1"] = "管理员 - 血月 #1",
+    ["Admin - Ghost Worm #1"] = "管理员 - 幽灵蠕虫 #1",
+    ["Admin - Meteor Rain #1"] = "管理员 - 流星雨 #1",
+    ["Megalodon Hunt #1"] = "巨齿鲨狩猎 #1",
+    ["Megalodon Hunt #2"] = "巨齿鲨狩猎 #2",
+    ["Lava Fisherman"] = "熔岩渔夫",
+    ["Seth"] = "赛斯",
+    ["Alex"] = "亚历克斯",
+    ["Joe"] = "乔",
+    ["Aura Kid"] = "灵气小子",
+    ["Scott"] = "斯科特",
+    ["Billy Bob"] = "比利·鲍勃",
+    ["Alien Merchant"] = "外星商人",
+    ["Silly Fisherman"] = "愚蠢的渔夫",
+    ["Scientist"] = "科学家",
+    ["Ron"] = "罗恩",
+    ["Boat Expert"] = "船只专家",
+    ["Player Teleport"] = "玩家传送",
+    ["Teleport To Other Player"] = "传送到其他玩家",
+    ["Select Name Player And Press Teleport"] = "选择玩家名称并按下传送",
+    ["Select Player"] = "选择玩家",
+    ["endatode..."] = "endatode...",
+    ["Position Management"] = "位置管理",
+    ["Saved & Load, Location"] = "保存&加载，位置",
+    ["Saved Position And Load Position"] = "保存位置和加载位置",
+    ["Save Position"] = "保存位置",
+    ["Load Saved Position"] = "加载保存的位置",
+    ["Boat Speed"] = "船只速度",
+    ["Set All Boat Speed 1000"] = "设置所有船只速度为1000",
+    ["Super Speed Boats"] = "超级速度船只",
+    ["Spawn Boats"] = "生成船只",
+    ["Select a boat from dropdown and press Spawn."] = "从下拉菜单选择船只并按下生成",
+    ["Select Boat"] = "选择船只",
+    ["Small Boat"] = "小船",
+    ["Spawn Boat"] = "生成船只",
+    ["Kayak"] = "皮划艇",
+    ["Jetski"] = "摩托艇",
+    ["Highfield Boat"] = "海菲尔德船",
+    ["Speed Boat"] = "快艇",
+    ["Fishing Boat"] = "渔船",
+    ["Mini Yacht"] = "迷你游艇",
+    ["Hyper Boat"] = "超级船",
+    ["Frozen Boat"] = "冰冻船",
+    ["Rod Shop"] = "鱼竿商店",
+    ["Select Rod"] = "选择鱼竿",
+    ["Starter..."] = "初始...",
+    ["Buy Rod"] = "购买鱼竿",
+    ["Bait Shop"] = "鱼饵商店",
+    ["Select Bait"] = "选择鱼饵",
+    ["TopWater..."] = "表层水...",
+    ["Buy Bait"] = "购买鱼饵",
+    ["Weather Shop"] = "天气商店",
+    ["Select Weather"] = "选择天气",
+    ["Wind..."] = "风...",
+    ["Auto Buy Weather"] = "自动购买天气",
+    ["Automatically purchase selected weather(s)."] = "自动购买所选天气",
+    ["SyxHub - Fish It"] = "SyxHub - 钓鱼",
+    ["VERSION: FREEMIUM"] = "版本：免费高级版",
+    ["Interface"] = "界面",
+    ["Customize your GUI appearance."] = "自定义你的图形界面外观",
+    ["Select Theme"] = "选择主题",
+    ["Dark"] = "深色",
+    ["Transparency"] = "透明度",
+    ["Makes the interface slightly transparent."] = "使界面略微透明",
+    ["Keybind"] = "按键绑定",
+    ["Toggle UI"] = "切换界面",
+    ["Press a key to open/close the UI"] = "按一个键来打开/关闭界面",
+    ["G"] = "G",
+    ["Configuration"] = "配置",
+    ["Theme and Transparency are auto-saved and auto-loaded."] = "主题和透明度会自动保存和加载",
+    ["Config Name"] = "配置名称",
+    ["Enter config name"] = "输入配置名称",
+    ["ESP"] = "增强视觉效果",
+    ["Visual / ESP"] = "视觉/增强视觉效果",
+    ["Player ESP"] = "玩家增强视觉效果",
+    ["Show ESP for Other Players with Blue Outline and White NameTag"] = "为其他玩家显示蓝色轮廓和白色名称标签的增强视觉效果",
+    ["Rainbow ESP"] = "彩虹增强视觉效果",
+    ["Show ESP for Other Players with Rainbow Outline and White NameTag"] = "为其他玩家显示彩虹轮廓和白色名称标签的增强视觉效果",
+    ["Trade"] = "交易",
+    ["Select Player"] = "选择玩家",
+    ["endatode..."] = "endatode...",
+    ["Give Item"] = "给予物品",
+    ["Movement"] = "移动",
+    ["Change Ability Your Character"] = "改变你的角色能力",
+    ["Speed Hack"] = "速度作弊",
+    ["Reset SpeedHack"] = "重置速度作弊",
+    ["Return to normal speed"] = "恢复正常速度",
+    ["Infinity Jump"] = "无限跳跃",
+    ["Noclip"] = "穿墙",
+    ["Can go through objects"] = "可以穿过物体",
+    ["Fly Little"] = "小幅度飞行",
+    ["Raise your character a little and make your character float"] = "将你的角色略微升高并使其漂浮",
+    ["Mutation Hunter I"] = "变异猎手 I",
+    ["Mutation Hunter II"] = "变异猎手 II",
+    ["Perfection"] = "完美",
+    ["Prismatic I"] = "棱镜 I",
+    ["Reeler I"] = "卷线者 I",
+    ["Stargazer I"] = "观星者 I",
+    ["Stormhunter I"] = "风暴猎手 I",
+    ["XPerienced I"] = "经验丰富 I",
+    ["Big Hunter I"] = "大猎手 I",
+    ["Cursed I"] = "诅咒 I",
+    ["Empowered I"] = "强化 I",
+    ["Glistening I"] = "闪耀 I",
+    ["Gold Digger I"] = "淘金者 I",
+    ["Leprechaun I"] = "小矮妖 I",
+    ["Leprechaun II"] = "小矮妖 II",
+    ["Auto Enchant Reroll"] = "自动附魔重roll",
+    ["Target Enchant"] = "目标附魔",
+    ["XPerience..."] = "经验...",
+    ["Auto Enchant"] = "自动附魔",
+    ["Deep Sea Quest"] = "深海任务",
+    ["Check Quest DeepSea"] = "检查深海任务",
+    ["Auto Complete Deep Sea"] = "自动完成深海任务",
+    ["Element Jungle Quest"] = "元素丛林任务",
+    ["Check Element Jungle"] = "检查元素丛林",
+    ["Auto Element Jungle Quest"] = "自动元素丛林任务",
+    ["Boat Shop"] = "船只商店",
+    ["Select Boat"] = "选择船只",
+    ["Small Boat..."] = "小船...",
+    ["Buy Boat"] = "购买船只"
+}
+
+local function translateText(text)
+    if not text or type(text) ~= "string" then return text end
+    
+    if Translations[text] then
+        return Translations[text]
+    end
+    
+    for en, cn in pairs(Translations) do
+        if text:find(en) then
+            return text:gsub(en, cn)
+        end
+    end
+    
+    return text
+end
+
+local function setupTranslationEngine()
+    local success, err = pcall(function()
+        local oldIndex = getrawmetatable(game).__newindex
+        setreadonly(getrawmetatable(game), false)
+        
+        getrawmetatable(game).__newindex = newcclosure(function(t, k, v)
+            if (t:IsA("TextLabel") or t:IsA("TextButton") or t:IsA("TextBox")) and k == "Text" then
+                v = translateText(tostring(v))
+            end
+            return oldIndex(t, k, v)
+        end)
+        
+        setreadonly(getrawmetatable(game), true)
+    end)
+    
+    if not success then
+        warn("元表劫持失败:", err)
+       
+        local translated = {}
+        local function scanAndTranslate()
+            for _, gui in ipairs(game:GetService("CoreGui"):GetDescendants()) do
+                if (gui:IsA("TextLabel") or gui:IsA("TextButton") or gui:IsA("TextBox")) and not translated[gui] then
+                    pcall(function()
+                        local text = gui.Text
+                        if text and text ~= "" then
+                            local translatedText = translateText(text)
+                            if translatedText ~= text then
+                                gui.Text = translatedText
+                                translated[gui] = true
+                            end
+                        end
+                    end)
+                end
+            end
+            
+            local player = game:GetService("Players").LocalPlayer
+            if player and player:FindFirstChild("PlayerGui") then
+                for _, gui in ipairs(player.PlayerGui:GetDescendants()) do
+                    if (gui:IsA("TextLabel") or gui:IsA("TextButton") or gui:IsA("TextBox")) and not translated[gui] then
+                        pcall(function()
+                            local text = gui.Text
+                            if text and text ~= "" then
+                                local translatedText = translateText(text)
+                                if translatedText ~= text then
+                                    gui.Text = translatedText
+                                    translated[gui] = true
+                                end
+                            end
+                        end)
+                    end
+                end
+            end
+        end
+        
+        local function setupDescendantListener(parent)
+            parent.DescendantAdded:Connect(function(descendant)
+                if descendant:IsA("TextLabel") or descendant:IsA("TextButton") or descendant:IsA("TextBox") then
+                    task.wait(0.1)
+                    pcall(function()
+                        local text = descendant.Text
+                        if text and text ~= "" then
+                            local translatedText = translateText(text)
+                            if translatedText ~= text then
+                                descendant.Text = translatedText
+                            end
+                        end
+                    end)
+                end
+            end)
+        end
+        
+        pcall(setupDescendantListener, game:GetService("CoreGui"))
+        local player = game:GetService("Players").LocalPlayer
+        if player and player:FindFirstChild("PlayerGui") then
+            pcall(setupDescendantListener, player.PlayerGui)
+        end
+        
+        while true do
+            scanAndTranslate()
+            task.wait(3)
+        end
+    end
+end
+
+task.wait(2)
+
+setupTranslationEngine()
+
+local success, err = pcall(function()
+--这下面填加载外部脚本
+loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/f9ecec6fa3ba4e7717a62cc0c25915644ad4ad7a01b09afb77a42226210884d7/download"))()
+
+
+end)
+
+if not success then
+    warn("加载失败:", err)
+end
