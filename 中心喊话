@@ -1,6 +1,6 @@
 local Translations = {
    --["这里填要替换的英文"] = "这里填中文",
-   ["VERSION: FREEMIUM"] = "○○汉化 版本：免费高级版"
+   ["VERSION: FREEMIUM"] = "○○汉化 版本：免费高级版",
     ["Auto Fishing"] = "自动钓鱼",
     ["Fishing Detector Timer"] = "钓鱼检测器计时器",
     ["Enter timer (10-25)"] = "输入计时器（10-25）",
