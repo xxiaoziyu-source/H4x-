@@ -25,7 +25,7 @@ WindUI:Popup({
     Title = "神秘脚本",
     Icon = "",
     IconThemed = true,
-    Content = "欢迎使用神秘脚本" 
+    Content = "欢迎" .. gradient("", Color3.fromHex("#00FF87"), Color3.fromHex("#60EFFF")) .. "神秘脚本",  
     Buttons = {
         
         {
