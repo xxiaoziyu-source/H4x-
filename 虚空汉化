@@ -70,15 +70,6 @@ local Window = WindUI:CreateWindow({
     SideBarWidth = 200, ScrollBarEnabled = true, 
     Background = "rbxassetid://133845998014781" })
 
-    User = {
-        Enabled = true,
-        Callback = function() print("clicked") end,
-        Anonymous = false
-    },
-    SideBarWidth = 200,
-    ScrollBarEnabled = true
-})
-
 task.spawn(function()
     wait(2)
     
