@@ -67,7 +67,8 @@ local Window = WindUI:CreateWindow({
     Transparent = true,
     Theme = "Light",    
     User = { Enabled = true }, 
-    SideBarWidth = 200, ScrollBarEnabled = true, 
+    SideBarWidth = 200, 
+    ScrollBarEnabled = true, 
     Background = "rbxassetid://133845998014781" })
 
 task.spawn(function()
