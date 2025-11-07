@@ -1,4 +1,4 @@
--- 我脚本也没有什么好的功能，为什么要破解我的脚本😭😭😭
+-- 我脚本也没有什么好的功能，为什么要破解我的脚本😭😭
 
 WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
@@ -25,7 +25,7 @@ WindUI:Popup({
     Title = "神秘脚本",
     Icon = "",
     IconThemed = true,
-    Content = "欢迎" .. gradient("", Color3.fromHex("#00FF87"), Color3.fromHex("#60EFFF")) .. "神秘脚本",  
+    Content = "欢迎" .. gradient("使用", Color3.fromHex("#00FF87"), Color3.fromHex("#60EFFF")) .. "神秘脚本",  
     Buttons = {
         
         {
@@ -86,33 +86,38 @@ local Window = WindUI:CreateWindow({
 })
 
 task.spawn(function()
-    task.wait(3)
+    wait(2)
+    
+    local background = Instance.new("ImageLabel")
+    background.Name = "WhiteHoleBackground"
+    background.Image = "rbxassetid://113857708636459"
+    background.Size = UDim2.new(1, 0, 1, 0)
+    background.Position = UDim2.new(0, 0, 0, 0)
+    background.BackgroundTransparency = 1
+    background.ScaleType = Enum.ScaleType.Crop
+    background.ZIndex = -1
+    background.ImageTransparency = 0.2
     
     local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
     local windUI = playerGui:WaitForChild("WindUI")
-    
     if windUI then
-        local mainFrame
-        for i = 1, 10 do
-            mainFrame = windUI:FindFirstChild("MainFrame") or windUI:FindFirstChildWhichIsA("Frame")
-            if mainFrame then break end
-            task.wait(0.5)
-        end
-        
+        local mainFrame = windUI:FindFirstChild("MainFrame") or windUI:FindFirstChildWhichIsA("Frame")
         if mainFrame then
-            local background = Instance.new("ImageLabel")
-            background.Name = "WhiteHoleBackground"
-            background.Image = "rbxassetid://113857708636459"
-            background.Size = UDim2.new(1, 0, 1, 0)
-            background.Position = UDim2.new(0, 0, 0, 0)
-            background.BackgroundTransparency = 1
-            background.ScaleType = Enum.ScaleType.Crop
-            background.ZIndex = -1
-            background.ImageTransparency = 0.2
             background.Parent = mainFrame
+        else
+            background.Parent = windUI
         end
     end
 end)
+
+Window:CreateTopbarButton("MyCustomButton1", "bird", function() print("clicked 1!") end, 990)
+Window:CreateTopbarButton("MyCustomButton3", "battery-plus", function() 
+    if Window.ToggleFullscreen then
+        Window:ToggleFullscreen() 
+    else
+        print("WindUI不支持ToggleFullscreen方法")
+    end
+end, 989)
 
 Window:EditOpenButton({
     Title = "神秘脚本",
@@ -1019,14 +1024,14 @@ Tabs.StealBrain:Button({
 })
 
 Tabs.StealBrain:Button({
-    Title = "复制红辣椒汉化代码",
+    Title = "红辣椒(汉化)",
+    Desc = "最新版的11.07",
+    Locked = false,
     Callback = function()
-        setclipboard("loadstring(game:HttpGet("https://raw.githubusercontent.com/xxiaoziyu-source/roblox/refs/heads/main/Protected_2849301315080580.lua.txt"))()")
-        WindUI:Notify({
-            Title = " Zero，zero汉化",
-            Content = "已复制到剪贴板",
-            Duration = 3
-        })
+        pcall(function()
+             loadstring(game:HttpGet("https://raw.githubusercontent.com/xxiaoziyu-source/roblox/refs/heads/main/Protected_2849301315080580.lua.txt"))()
+            print("9178加载成功")
+        end)
     end
 })
 
@@ -1448,6 +1453,6 @@ Tabs.WarTycoon:Button({
 print("神秘脚本加载完成！")
 WindUI:Notify({
     Title = "神秘脚本",
-    Content = "圈钱脚本加载完成🤑🤑🤑🤑🤑",
+    Content = "圈钱脚本加载完成111111",
     Duration = 3
 })
