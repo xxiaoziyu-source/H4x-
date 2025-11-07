@@ -183,6 +183,15 @@ local Tabs = {
 
 Window:SelectTab(1)
 
+Tabs.Notice:Paragraph({
+    Title = "神秘脚本",
+    Desc = "开脚本我就不受着",
+    Image = "rbxassetid://133845998014781",
+    ImageSize = 65,
+    Thumbnail = "rbxassetid://133845998014781",
+    ThumbnailSize = 180
+})
+
 Tabs.Notice:Section({ 
     Title = "脚本说明",
     TextXAlignment = "Left",
