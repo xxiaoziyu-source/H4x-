@@ -549,9 +549,23 @@ Tabs.General:Button({
 })
 
 Tabs.General:Button({
+    Title = "铁拳",
+    Callback = function()
+           loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt'))()
+    end
+})
+
+Tabs.General:Button({
     Title = "反挂机",
     Callback = function()
          loadstring(game:HttpGet("https://pastebin.com/raw/9fFu43FF"))()
+    end
+})
+
+Tabs.General:Button({
+    Title = "键盘",
+    Callback = function()
+         loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt"))()
     end
 })
 
@@ -566,7 +580,7 @@ Tabs.General:Toggle({
 })
 
 Tabs.General:Button({
-    Title = "F 3x改进",
+    Title = "F3x改进",
     Callback = function()
        loadstring(game:HttpGet("https://raw.githubusercontent.com/xxiaoziyu-source/H4x-/refs/heads/main/F%203%20x"))()
     end
