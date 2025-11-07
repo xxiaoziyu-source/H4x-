@@ -66,6 +66,7 @@ local Window = WindUI:CreateWindow({
     Size = UDim2.fromOffset(580, 460),
     Transparent = true,
     Theme = "Light",    
+    HideSearchBar = false,
     User = { Enabled = true }, 
     SideBarWidth = 200, 
     ScrollBarEnabled = true, 
