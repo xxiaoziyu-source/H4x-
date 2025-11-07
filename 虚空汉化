@@ -52,8 +52,8 @@ WindUI:Notify({
 
 task.wait(1.5)
 WindUI:Notify({
-    Title = "催更提示", 
-    Content = "如果要催更的话就加一下Q群\n关注我也行",
+    Title = "反挂机", 
+    Content = "已自动开启反挂机",
     Duration = 5
 })
 
@@ -225,6 +225,40 @@ Tabs.Notice:Section({
     Title = "调节功能",
     TextXAlignment = "Left",
     TextSize = 25,
+})
+
+Tabs.Notice:Button({
+    Title = "反挂机",
+    Desc = "加载反挂机",
+    Callback = function()
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/greatjakson-lgtm/-2/main/99nights%E5%8F%8D%E6%8C%82%E6%9C%BA%E8%84%9A%E6%9C%AC"))()
+        end)
+    end
+})
+
+Tabs.Notice:Toggle({
+    Title = "反作弊",
+    Desc = "可以绕过墨水的反作弊🤫",
+    Value = true,
+    Callback = function(state)
+        if state then
+            setupAFKProtection()
+            WindUI:Notify({
+                Title = "SM脚本",
+                Content = "防作弊已开启",
+                Duration = 3,
+                Color = Color3.fromRGB(0, 255, 0)
+            })
+        else
+            WindUI:Notify({
+                Title = "SM脚本",
+                Content = "防作弊已禁用",
+                Duration = 5,
+                Color = Color3.fromRGB(255, 165, 0)
+            })
+        end
+    end
 })
 
 local TimeTag = Window:Tag({
@@ -1454,6 +1488,6 @@ Tabs.WarTycoon:Button({
 print("神秘脚本加载完成！")
 WindUI:Notify({
     Title = "神秘脚本",
-    Content = "圈钱脚本加载完成111111",
+    Content = "圈钱脚本加载完成",
     Duration = 3
 })
