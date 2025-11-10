@@ -114,6 +114,7 @@ local Tabs = {
     CutTrees = Window:Tab({ Title = "砍伐树木", Icon = "bell" }),
     StrangeGuns = Window:Tab({ Title = "奇怪枪械", Icon = "bell" }),
     PlantZombie = Window:Tab({ Title = "植物大战脑红", Icon = "bell" }),
+    Defuse = Window:Tab({ Title = "摧毁师", Icon = "bell" }),
     BuildPlane = Window:Tab({ Title = "建造一架飞机", Icon = "plane" }),
     GoFishing = Window:Tab({ Title = "钓鱼吧", Icon = "fish" }),
     BladeBall = Window:Tab({ Title = "刀刃球", Icon = "ball" }),
@@ -1270,6 +1271,18 @@ Tabs.PlantZombie:Button({
     Callback = function()
         pcall(function()
              loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/PlantsVsBrainrots"))()
+            print("9178加载成功")
+        end)
+    end
+})
+
+Tabs.Defuse:Button({
+    Title = "不知名(汉化)",
+    Desc = "不用解卡密",
+    Locked = false,
+    Callback = function()
+        pcall(function()
+             loadstring(game:HttpGet("https://raw.githubusercontent.com/xxiaoziyu-source/oo-/refs/heads/main/%E9%80%9A%E7%94%A8%E6%B1%89%E5%8C%96(1).Lua"))()
             print("9178加载成功")
         end)
     end
