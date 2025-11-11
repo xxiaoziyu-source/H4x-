@@ -132,9 +132,9 @@ Window:SelectTab(1)
 Tabs.Notice:Paragraph({
     Title = "神秘脚本",
     Desc = "开脚本我就不受着",
-    Image = "rbxassetid://133845998014781",
+    Image = "https://github.com/xxiaoziyu-source/oo-/blob/3ccad8e56084c7908a49ad6381886dd4f345660d/1762883361933.png",
     ImageSize = 65,
-    Thumbnail = "rbxassetid://133845998014781",
+    Thumbnail = "https://github.com/xxiaoziyu-source/oo-/blob/3ccad8e56084c7908a49ad6381886dd4f345660d/1762883361933.png",
     ThumbnailSize = 180
 })
 
