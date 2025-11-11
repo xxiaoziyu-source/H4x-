@@ -146,7 +146,7 @@ Tabs.Notice:Section({
 
 Tabs.Notice:Paragraph({
     Title = "2.0.1更新内容",
-    Desc = "Volcano汉化[海贼王]\n修复99页虚空汉化失败问题",
+    Desc = "Volcano汉化[海贼王]\n修复99页虚空汉化失败问题\nDarkones汉化[森林中99个夜晚]",
 })
 
 Tabs.Notice:Paragraph({
