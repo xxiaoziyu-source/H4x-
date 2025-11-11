@@ -83,6 +83,53 @@ Window:CreateTopbarButton("MyCustomButton3", "battery-plus", function()
     end
 end, 989)
 
+-- 标准WindUI主框架定位（官方默认名称）
+local mainFrame = Window.Window
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+
+local mainBorder = Instance.new("UIStroke")
+mainBorder.Name = "MainFrameFlowBorder"
+mainBorder.Thickness = 4
+mainBorder.ScaleWithParent = true
+mainBorder.Parent = mainFrame
+
+local function getGradient(rotOffset)
+    local keypoints = {}
+    for i = 0, 7 do
+        local angle = (i * 45 + rotOffset) % 360
+        local t = angle / 360
+        local gray = math.floor(255 * t)
+        table.insert(keypoints, ColorSequenceKeypoint.new(t, Color3.fromRGB(gray, gray, gray)))
+    end
+    return ColorSequence.new(keypoints)
+end
+
+local rotationOffset = 0
+local baseThickness = 4
+local baseSize = Vector2.new(580, 460)
+
+RunService.Heartbeat:Connect(function(deltaTime)
+    rotationOffset = (rotationOffset + deltaTime * 40) % 360
+    local currentGradient = getGradient(rotationOffset)
+    TweenService:Create(
+        mainBorder,
+        TweenInfo.new(0.05, Enum.EasingStyle.Linear),
+        {Color = currentGradient}
+    ):Play()
+
+    local currentSize = Vector2.new(mainFrame.AbsoluteSize.X, mainFrame.AbsoluteSize.Y)
+    local scaleRatio = math.min(currentSize.X / baseSize.X, currentSize.Y / baseSize.Y)
+    local newThickness = math.max(baseThickness * scaleRatio, 2)
+    mainBorder.Thickness = newThickness
+end)
+
+Window.OnOpen:Connect(function()
+    TweenService:Create(mainBorder, TweenInfo.new(0.3), {Thickness = baseThickness}):Play()
+end)
+Window.OnClose:Connect(function()
+    TweenService:Create(mainBorder, TweenInfo.new(0.3), {Thickness = 0}):Play()
+end)
 
 Window:EditOpenButton({
     Title = "神秘脚本",
