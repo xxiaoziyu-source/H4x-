@@ -1,4 +1,4 @@
--- 加载汉化煤的配分脚本🤮
+-- 加载汉化煤的配分脚本🤮😱
 loadstring(game:HttpGet("https://raw.githubusercontent.com/xxiaoziyu-source/roblox/refs/heads/main/-45"))()
 
 
