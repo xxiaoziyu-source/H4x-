@@ -635,18 +635,134 @@ Tabs.General:Button({
 })
 
 Tabs.AutoLocalization:Paragraph({
-    Title = "目前可以汉化的脚本",
-    Desc = "偷走脑红任何脚本\nH4x[钓鱼吧]",
+    Title = "自动汉化",
+    Desc = "已扫描文本: 0 | 已汉化文本: 0"
 })
+
+local statusLabel = Tabs.AutoLocalization:Paragraph({
+    Title = "状态",
+    Desc = "已扫描文本: 0 | 已汉化文本: 0"
+})
+
+local isTranslating = false
+local translatedCount = 0
+local scannedCount = 0
+local translationCache = {}
+
+local function updateStatus()
+    statusLabel:SetDesc("已扫描文本: "..scannedCount.." | 已汉化文本: "..translatedCount)
+end
+
+local function deepTranslate(text)
+    if translationCache[text] then
+        return translationCache[text]
+    end
+    
+    local chinesePattern = "[\228-\233][\128-\191][\128-\191]"
+    if text:match(chinesePattern) then
+        return text
+    end
+    
+    local translations = {
+        ["Start"] = "开始", ["Play"] = "播放", ["Settings"] = "设置", ["Options"] = "选项",
+        ["Exit"] = "退出", ["Back"] = "返回", ["Continue"] = "继续", ["Yes"] = "是",
+        ["No"] = "否", ["OK"] = "确定", ["Cancel"] = "取消", ["Close"] = "关闭",
+        ["Save"] = "保存", ["Load"] = "加载", ["New"] = "新建", ["Delete"] = "删除",
+        ["Edit"] = "编辑", ["Help"] = "帮助", ["About"] = "关于", ["Version"] = "版本",
+        ["Game"] = "游戏", ["Player"] = "玩家", ["Score"] = "分数", ["Level"] = "等级",
+        ["Health"] = "生命值", ["Money"] = "金钱", ["Coins"] = "金币", ["Time"] = "时间",
+        ["Shop"] = "商店", ["Inventory"] = "背包", ["Equipment"] = "装备", ["Skills"] = "技能",
+        ["Quests"] = "任务", ["Map"] = "地图", ["Chat"] = "聊天", ["Friends"] = "好友",
+        ["Profile"] = "资料", ["Achievements"] = "成就", ["Leaderboard"] = "排行榜"
+    }
+    
+    for eng, chs in pairs(translations) do
+        if text:lower() == eng:lower() then
+            translationCache[text] = chs
+            return chs
+        end
+    end
+    
+    translationCache[text] = text
+    return text
+end
+
+local function translateGuiObject(gui)
+    if not gui:IsA("GuiObject") then return end
+    
+    scannedCount = scannedCount + 1
+    
+    if gui:IsA("TextLabel") or gui:IsA("TextButton") or gui:IsA("TextBox") then
+        local originalText = gui.Text
+        if originalText and #originalText > 0 and #originalText < 50 then
+            local translatedText = deepTranslate(originalText)
+            if originalText ~= translatedText then
+                gui.Text = translatedText
+                translatedCount = translatedCount + 1
+            end
+        end
+    end
+end
+
+local function scanAndTranslate(root)
+    for _, child in ipairs(root:GetDescendants()) do
+        if isTranslating then
+            translateGuiObject(child)
+        else
+            break
+        end
+        task.wait()
+    end
+end
+
+local connection
 Tabs.AutoLocalization:Button({
-    Title = "自动汉化",  
-    Desc = "目前已修卡顿问题",
-    Locked = false,
+    Title = "开始自动汉化",
     Callback = function()
-        pcall(function()
-             loadstring(game:HttpGet("https://raw.githubusercontent.com/xxiaoziyu-source/H4x-/refs/heads/main/%E8%87%AA%E5%8A%A8%E6%B1%89%E5%8C%96%E3%80%82%20Pro%20max"))()
-            print("9178加载成功")
+        if isTranslating then return end
+        
+        isTranslating = true
+        translatedCount = 0
+        scannedCount = 0
+        translationCache = {}
+        
+        Tabs.AutoLocalization:Prompt({
+            Title = "汉化开始",
+            Content = "开始扫描界面文本...",
+            Time = 3
+        })
+        
+        task.spawn(function()
+            while isTranslating do
+                scanAndTranslate(game:GetService("CoreGui"))
+                scanAndTranslate(game:GetService("Players").LocalPlayer.PlayerGui)
+                updateStatus()
+                task.wait(1)
+            end
         end)
+        
+        connection = game:GetService("Players").LocalPlayer.PlayerGui.DescendantAdded:Connect(function(descendant)
+            if isTranslating then
+                translateGuiObject(descendant)
+                updateStatus()
+            end
+        end)
+    end
+})
+
+Tabs.AutoLocalization:Button({
+    Title = "关闭自动汉化",
+    Callback = function()
+        isTranslating = false
+        if connection then
+            connection:Disconnect()
+        end
+        Tabs.AutoLocalization:Prompt({
+            Title = "汉化已关闭",
+            Content = "已停止自动汉化，已汉化文本保持不变",
+            Time = 3
+        })
+        updateStatus()
     end
 })
 
