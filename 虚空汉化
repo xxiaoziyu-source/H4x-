@@ -1,5 +1,4 @@
 
-
 WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 function gradient(text, startColor, endColor)
@@ -878,7 +877,7 @@ Tabs.ForestNight:Button({
 
 Tabs.ForestNight:Button({
     Title = "最强刷糖果脚本",
-    Desc = "进入游戏后再加载",
+    Desc = "目前已失效😭",
     Locked = false,
     Callback = function()
         pcall(function()
@@ -1027,6 +1026,18 @@ Tabs.ForestNight:Button({
     Callback = function()
         pcall(function()
              loadstring(game:HttpGet("https://raw.githubusercontent.com/xxiaoziyu-source/T-/refs/heads/main/Cec%E6%B1%89%E5%8C%96"))()
+            print("9178加载成功")
+        end)
+    end
+})
+
+Tabs.ForestNight:Button({
+    Title = "Darkones帝国(汉化)",
+    Desc = "不需要解卡密",  
+    Locked = false,
+    Callback = function()
+        pcall(function()
+             loadstring(game:HttpGet("https://raw.githubusercontent.com/xxiaoziyu-source/-/refs/heads/main/Darkones%E5%B8%9D%E5%9B%BD"))()
             print("9178加载成功")
         end)
     end
