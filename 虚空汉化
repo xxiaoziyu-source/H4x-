@@ -337,9 +337,6 @@ Tabs.General:Slider({
     end
 })
 
--- 在现有的通用功能后面添加以下代码
-
--- 头部大小设置
 Tabs.General:Input({
     Title = "头部大小",
     Default = "1",
@@ -357,7 +354,6 @@ Tabs.General:Input({
     end
 })
 
--- 敌人碰撞箱大小设置
 Tabs.General:Input({
     Title = "敌人碰撞箱大小",
     Default = "1",
@@ -382,7 +378,6 @@ Tabs.General:Input({
     end
 })
 
--- 互动时长设置
 Tabs.General:Input({
     Title = "互动时长",
     Default = "1",
