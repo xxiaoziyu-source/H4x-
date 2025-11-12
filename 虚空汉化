@@ -161,7 +161,7 @@ local Tabs = {
 Window:SelectTab(1)
 
 Tabs.Notice:Paragraph({
-    Title = "神秘脚本",
+    Title = "神秘脚本",
     Desc = "开脚本我就不受着",
     Image = "https://raw.githubusercontent.com/xxiaoziyu-source/oo-/3ccad8e56084c7908a49ad6381886dd4f345660d/1762883361933.png",
     ImageSize = 65,
