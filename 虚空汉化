@@ -337,6 +337,114 @@ Tabs.General:Slider({
     end
 })
 
+-- 在现有的通用功能后面添加以下代码
+
+-- 头部大小设置
+Tabs.General:Input({
+    Title = "头部大小",
+    Default = "1",
+    Numeric = true,
+    Finished = false,
+    Callback = function(Value)
+        local scale = tonumber(Value) or 1
+        local Character = game.Players.LocalPlayer.Character
+        if Character then
+            local head = Character:FindFirstChild("Head")
+            if head then
+                head.Size = Vector3.new(scale, scale, scale)
+            end
+        end
+    end
+})
+
+-- 敌人碰撞箱大小设置
+Tabs.General:Input({
+    Title = "敌人碰撞箱大小",
+    Default = "1",
+    Numeric = true,
+    Finished = false,
+    Callback = function(Value)
+        local size = tonumber(Value) or 1
+        local Players = game:GetService("Players")
+        local LocalPlayer = Players.LocalPlayer
+        
+        for _, player in ipairs(Players:GetPlayers()) do
+            if player ~= LocalPlayer then
+                local char = player.Character
+                if char then
+                    local humanoidRootPart = char:FindFirstChild("HumanoidRootPart")
+                    if humanoidRootPart then
+                        humanoidRootPart.Size = Vector3.new(size, size, size)
+                    end
+                end
+            end
+        end
+    end
+})
+
+-- 互动时长设置
+Tabs.General:Input({
+    Title = "互动时长",
+    Default = "1",
+    Numeric = true,
+    Finished = false,
+    Callback = function(Value)
+        local time = tonumber(Value) or 1
+        for _, obj in ipairs(workspace:GetDescendants()) do
+            if obj:IsA("ProximityPrompt") then
+                obj.HoldDuration = time
+            end
+        end
+    end
+})
+
+-- 移动速度设置（Input版本，与Slider并存）
+Tabs.General:Input({
+    Title = "移动速度输入",
+    Default = "16",
+    Numeric = true,
+    Finished = false,
+    Callback = function(Value)
+        local speed = tonumber(Value) or 16
+        local Plr = game.Players.LocalPlayer
+        if Plr.Character then
+            local Humanoid = Plr.Character:FindFirstChildOfClass("Humanoid")
+            if Humanoid then
+                Humanoid.WalkSpeed = speed
+            end
+        end
+    end
+})
+
+-- 跳跃高度设置（Input版本，与Slider并存）
+Tabs.General:Input({
+    Title = "跳跃高度输入",
+    Default = "50",
+    Numeric = true,
+    Finished = false,
+    Callback = function(Value)
+        local power = tonumber(Value) or 50
+        if game.Players.LocalPlayer.Character then
+            local humanoid = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                humanoid.JumpPower = power
+            end
+        end
+    end
+})
+
+-- 自身重力设置（Input版本，与Slider并存）
+Tabs.General:Input({
+    Title = "自身重力输入",
+    Default = "196.2",
+    Numeric = true,
+    Finished = false,
+    Callback = function(Value)
+        local gravity = tonumber(Value) or 196.2
+        game.Workspace.Gravity = gravity
+    end
+})
+
 Tabs.General:Button({
     Title = "飞行v3",
     Callback = function()
