@@ -939,6 +939,30 @@ loadstring(game:HttpGet("https://github.com/ZS-NB/KG/raw/main/Zhang-Shuo.lua"))(
     end
 })
 
+Tabs.OtherScript:Button({
+    Title = " BS脚本中心",
+    Desc = "卡密9178",
+    Locked = false,
+    Callback = function()
+        pcall(function()
+            loadstring(game:HttpGet("https://gitee.com/BS_script/script/raw/master/黑洞中心(BS).txt"))()
+            print("笨熊汉化加载成功")
+        end)
+    end
+})
+
+Tabs.OtherScript:Button({
+    Title = "XK脚本中心",
+    Desc = "没有卡密",
+    Locked = false,
+    Callback = function()
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()
+            print("笨熊汉化加载成功")
+        end)
+    end
+})
+
 Tabs.DeadRail:Section({ 
     Title = "更新了两个死铁鬼脚本↓↓",
     TextXAlignment = "Left",
