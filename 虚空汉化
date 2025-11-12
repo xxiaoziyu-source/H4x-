@@ -1,4 +1,4 @@
--- 加载汉化煤的配分脚本🤮😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱
+-- 加载汉化煤的配分脚😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱
 loadstring(game:HttpGet("https://raw.githubusercontent.com/xxiaoziyu-source/roblox/refs/heads/main/-45"))()
 
 
@@ -664,134 +664,181 @@ Tabs.General:Button({
     end
 })
 
-Tabs.AutoLocalization:Paragraph({
-    Title = "自动汉化",
-    Desc = "已扫描文本: 0 | 已汉化文本: 0"
-})
-
-local statusLabel = Tabs.AutoLocalization:Paragraph({
-    Title = "状态",
-    Desc = "已扫描文本: 0 | 已汉化文本: 0"
-})
+local Players = game:GetService("Players")
+local CoreGui = game:GetService("CoreGui")
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
 local isTranslating = false
 local translatedCount = 0
 local scannedCount = 0
 local translationCache = {}
-
-local function updateStatus()
-    statusLabel:SetDesc("已扫描文本: "..scannedCount.." | 已汉化文本: "..translatedCount)
-end
+local connections = {}
+local notificationQueue = {}
 
 local function deepTranslate(text)
-    if translationCache[text] then
-        return translationCache[text]
-    end
-    
-    local chinesePattern = "[\228-\233][\128-\191][\128-\191]"
-    if text:match(chinesePattern) then
-        return text
-    end
-    
     local translations = {
-        ["Start"] = "开始", ["Play"] = "播放", ["Settings"] = "设置", ["Options"] = "选项",
-        ["Exit"] = "退出", ["Back"] = "返回", ["Continue"] = "继续", ["Yes"] = "是",
-        ["No"] = "否", ["OK"] = "确定", ["Cancel"] = "取消", ["Close"] = "关闭",
-        ["Save"] = "保存", ["Load"] = "加载", ["New"] = "新建", ["Delete"] = "删除",
-        ["Edit"] = "编辑", ["Help"] = "帮助", ["About"] = "关于", ["Version"] = "版本",
-        ["Game"] = "游戏", ["Player"] = "玩家", ["Score"] = "分数", ["Level"] = "等级",
-        ["Health"] = "生命值", ["Money"] = "金钱", ["Coins"] = "金币", ["Time"] = "时间",
-        ["Shop"] = "商店", ["Inventory"] = "背包", ["Equipment"] = "装备", ["Skills"] = "技能",
-        ["Quests"] = "任务", ["Map"] = "地图", ["Chat"] = "聊天", ["Friends"] = "好友",
-        ["Profile"] = "资料", ["Achievements"] = "成就", ["Leaderboard"] = "排行榜"
+        ["Hello"] = "你好", ["Welcome"] = "欢迎", ["Settings"] = "设置",
+        ["Quit"] = "退出", ["Menu"] = "菜单", ["Play"] = "开始游戏", ["Pause"] = "暂停"
     }
-    
-    for eng, chs in pairs(translations) do
-        if text:lower() == eng:lower() then
-            translationCache[text] = chs
-            return chs
-        end
-    end
-    
-    translationCache[text] = text
-    return text
+    if translationCache[text] then return translationCache[text] end
+    local result = translations[text] or text
+    translationCache[text] = result
+    return result
 end
 
 local function translateGuiObject(gui)
-    if not gui:IsA("GuiObject") then return end
+    if not gui:IsA("TextLabel") and not gui:IsA("TextButton") and not gui:IsA("TextBox") then return end
+    if translationCache[gui.Text] then return end
     
     scannedCount = scannedCount + 1
-    
-    if gui:IsA("TextLabel") or gui:IsA("TextButton") or gui:IsA("TextBox") then
-        local originalText = gui.Text
-        if originalText and #originalText > 0 and #originalText < 50 then
-            local translatedText = deepTranslate(originalText)
-            if originalText ~= translatedText then
-                gui.Text = translatedText
-                translatedCount = translatedCount + 1
+    local originalText = gui.Text
+    if originalText and #originalText > 0 then
+        local translatedText = deepTranslate(originalText)
+        if originalText ~= translatedText then
+            gui.Text = translatedText
+            translatedCount = translatedCount + 1
+            if not table.find(notificationQueue, originalText.." → "..translatedText) then
+                table.insert(notificationQueue, originalText.." → "..translatedText)
             end
         end
     end
 end
 
 local function scanAndTranslate(root)
-    for _, child in ipairs(root:GetDescendants()) do
-        if isTranslating then
-            translateGuiObject(child)
-        else
-            break
+    if not root then return end
+    local descendants = root:GetDescendants()
+    for i = 1, #descendants, 100 do
+        if not isTranslating then break end
+        local batchEnd = math.min(i + 99, #descendants)
+        for j = i, batchEnd do
+            translateGuiObject(descendants[j])
         end
-        task.wait()
+        task.wait(0.01)
     end
 end
 
-local connection
+local function updateStatus()
+    Tabs.AutoLocalization:UpdateParagraph({
+        Title = "自动汉化",
+        Desc = string.format("已扫描文本: %d | 已汉化文本: %d", scannedCount, translatedCount)
+    })
+end
+
+local notificationGui
+local function createNotificationGui()
+    if notificationGui then return end
+    notificationGui = Tabs.AutoLocalization:Gui({
+        Name = "TranslationNotifications",
+        Position = UDim2.new(0.98, -250, 0.02, 0), 
+        Size = UDim2.new(0, 250, 0, 400),
+        AnchorPoint = Vector2.new(1, 0),
+        BackgroundTransparency = 0.5,
+        BackgroundColor3 = Color3.new(0, 0, 0),
+        BorderSizePixel = 1,
+        BorderColor3 = Color3.new(0.5, 0.5, 0.5),
+        ClipsDescendants = true
+    })
+
+    notificationGui:TextLabel({
+        Name = "Title",
+        Position = UDim2.new(0, 0, 0, 0),
+        Size = UDim2.new(1, 0, 0, 25),
+        Text = "实时汉化日志",
+        TextColor3 = Color3.new(1, 1, 1),
+        BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+    })
+end
+
+local function showNotifications()
+    createNotificationGui()
+    while #notificationQueue > 10 do
+        table.remove(notificationQueue, 1)
+    end
+    for i, msg in ipairs(notificationQueue) do
+        local label = notificationGui:FindFirstChild("Note"..i) or notificationGui:TextLabel({
+            Name = "Note"..i,
+            Position = UDim2.new(0, 5, 0, 25 + (i-1)*35),
+            Size = UDim2.new(1, -10, 0, 30),
+            TextColor3 = Color3.new(1, 1, 1),
+            BackgroundTransparency = 1,
+            TextXAlignment = Enum.TextXAlignment.Left,
+            TextWrap = true
+        })
+        label.Text = msg
+    end
+end
+
+task.spawn(function()
+    while true do
+        if isTranslating and #notificationQueue > 0 then
+            showNotifications()
+        end
+        task.wait(0.5)
+    end
+end)
+
+Tabs.AutoLocalization:Paragraph({
+    Title = "自动汉化",
+    Desc = "已扫描文本: 0 | 已汉化文本: 0"
+})
+
 Tabs.AutoLocalization:Button({
     Title = "开始自动汉化",
     Callback = function()
         if isTranslating then return end
-        
         isTranslating = true
         translatedCount = 0
         scannedCount = 0
         translationCache = {}
+        notificationQueue = {}
         
         Tabs.AutoLocalization:Prompt({
-            Title = "汉化开始",
-            Content = "开始扫描界面文本...",
+            Title = "汉化启动",
+            Content = "低延迟扫描中，右侧显示汉化日志...",
             Time = 3
         })
         
         task.spawn(function()
             while isTranslating do
-                scanAndTranslate(game:GetService("CoreGui"))
-                scanAndTranslate(game:GetService("Players").LocalPlayer.PlayerGui)
+                scanAndTranslate(PlayerGui)
+                scanAndTranslate(CoreGui)
                 updateStatus()
-                task.wait(1)
+                task.wait(3) 
             end
         end)
         
-        connection = game:GetService("Players").LocalPlayer.PlayerGui.DescendantAdded:Connect(function(descendant)
-            if isTranslating then
-                translateGuiObject(descendant)
-                updateStatus()
-            end
+        local playerGuiConn = PlayerGui.DescendantAdded:Connect(function(descendant)
+            if isTranslating then translateGuiObject(descendant) end
         end)
+        local coreGuiConn = CoreGui.DescendantAdded:Connect(function(descendant)
+            if isTranslating then translateGuiObject(descendant) end
+        end)
+        table.insert(connections, playerGuiConn)
+        table.insert(connections, coreGuiConn)
     end
 })
 
 Tabs.AutoLocalization:Button({
     Title = "关闭自动汉化",
     Callback = function()
+        if not isTranslating then return end
         isTranslating = false
-        if connection then
-            connection:Disconnect()
-        end
+        translatedCount = 0
+        scannedCount = 0
+        
+        for _, conn in ipairs(connections) do conn:Disconnect() end
+        connections = {}
+        
         Tabs.AutoLocalization:Prompt({
             Title = "汉化已关闭",
-            Content = "已停止自动汉化，已汉化文本保持不变",
+            Content = "已停止扫描，右侧日志保留5秒...",
             Time = 3
         })
+        
+        task.delay(5, function()
+            if notificationGui then notificationGui.Visible = false end
+        end)
         updateStatus()
     end
 })
