@@ -2011,6 +2011,17 @@ Tabs.ForestNight:Section({
     TextSize = 25,
 })
 
+local Input = Tabs.ForestNight:Input({
+    Title = "虚空开发者版本",
+    Desc = "需要加入q群获取卡密😨"
+})
+
+Input:OnChange(function(value)
+    if value == "917813" then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/xxiaoziyu-source/roblox/refs/heads/main/Protected_9190250925389975.lua.txt"))()
+    end
+end)
+
 Tabs.ForestNight:Button({
     Title = "虚空(汉化)",
     Desc = "更新速度快而且免费不需解卡",
