@@ -1,0 +1,329 @@
+local Translations = {
+["Katchi Hub"] = "红色中心",
+["Katchi Hub Key System"] = "红色中心密钥系统",
+["Enter Key"] = "输入卡密",
+["Exit"] = "退出",
+["Get key"] = "获取卡密",
+["Submit"] = "验证",
+["Select Service"] = "选择解卡平台",
+["Platoboost"] = "普拉托平台",
+["Click to copy key link."] = "点击复制卡密链接",
+["Key System"] = "卡密系统",
+["Key link copied to clipboard."] = "平台链接已复制到剪贴板",
+["Katchi Hub Loaded"] = "红色中心已加载",
+["Successfully loaded KatchiHub v2.2"] = "成功加载红色中心 v2.2",
+["Use RightShift key to toggle the menu"] = "使用右Shift键切换菜单[电脑和外设]",
+["by Yuki"] = "由 Yuki 制作 ○○汉化",
+["Guts & BlackPowder"] = "内脏&黑火药",
+["Dashboard"] = "仪表盘",
+["Main"] = "主功能",
+["Esp"] = "透视",
+["Events"] = "事件",
+["Others"] = "其他",
+["Information"] = "信息",
+["Community"] = "社区",
+["Aiming"] = "辅助瞄准",
+["Legit Thingys"] = "常规功能",
+["Hitbox"] = "判定框",
+["Gun Mod"] = "枪支模组",
+["Shooting"] = "射击",
+["Save Players"] = "保存玩家",
+["Kill Aura"] = "自动击杀光环",
+["Classes"] = "职业",
+["Reach"] = "攻击碰撞箱扩展",
+["Players"] = "玩家",
+["Server Utilities"] = "服务器工具",
+["Movement"] = "移动",
+["Visual"] = "视觉Esp",
+["Themes"] = "面板主题",
+["Configs"] = "配置",
+["Headless Horseman Features"] = "无头骑士功能",
+["Hit Dracula"] = "攻击德古拉[吸血鬼boss]",
+["Profiles"] = "配置文件",
+["Theme"] = "主题",
+["Misc"] = "杂项",
+["Feedback"] = "反馈",
+["Dracula (New)"] = "德古拉（新增）",
+["Send Your Feedback"] = "提交你的反馈",
+["Head Hit"] = "头部命中",
+["Forces Attacks To Redirect to the zombies Head."] = "强制攻击转向山伯乐头部",
+["Auto Jump"] = "自动跳跃[应该是强制自动跳跃]",
+["Makes you jump When Thrusting Your Weapon"] = "在挥砍近战武器时自动跳跃",
+["Hitbox Expander"] = "碰撞箱扩展",
+["Expands zombie hitboxes for easier hits."] = "扩大山伯乐碰撞箱以更易命中",
+["Hitbox Zombie Size"] = "山伯乐碰撞箱大小",
+["Hitbox Zombie Range"] = "山伯乐碰撞箱范围",
+["Auto Reload"] = "自动换弹",
+["Automatically reload, Works Well with Auto Shoot Bomber."] = "自动换弹，自动射击自爆[自动黑枪]",
+["Auto Shoot Bomber"] = "自动射击自爆",
+["Toggles Auto Shooting Bombers."] = "开关自动射击自曝",
+["Instant Shoot"] = "即时射击[应该是秒射击无需换弹]",
+["Instantly Shoot Barrel Zombies (No Animations)"] = "立即射击自曝（无动画）",
+["Time Shots"] = "时机射击",
+["Wait for bomber to be shootable (moving toward you or slow)"] = "等待轰炸机进入可射击状态（向你移动或减速时）",
+["Max Target Range"] = "最大目标范围",
+["Maximum detection range."] = "最大探测范围",
+["Wall Check (Raycast)"] = "墙体检测（射线投射）",
+["bombers behind walls will be ignored."] = "墙体后的轰炸机会被忽略",
+["Auto Save Players"] = "自动救援玩家",
+["Shoot Zombies Grabbing The player."] = "射击抓住玩家的山伯乐",
+["Instant Save Players"] = "即时救援玩家",
+["Instantly shoot the zombie grabbing the player (No Animations)"] = "立即射击抓住玩家的僵尸（无动画）",
+["Save Player Delay"] = "救援玩家延迟",
+["Delay before shooting when saving player (seconds)"] = "救援玩家时射击前的延迟（秒）",
+["Max Save Players Range"] = "最大救援玩家范围",
+["Max save players distance."] = "最大救援玩家距离",
+["Will Reach The Zombie For About 30 studs (Might Be Lower)"] = "攻击距离约30 studs（可能更低）",
+["Reach Range"] = "攻击距离范围",
+["Range of Reach"] = "攻击距离的范围",
+["Automatically Kills Zombie In Range"] = "自动击杀范围内的僵尸",
+["Kill Aura Range"] = "自动击杀光环范围",
+["Range for Kill Aura"] = "自动击杀光环的范围",
+["Attack Speed"] = "攻击速度",
+["Kill Aura SpeedHit"] = "自动击杀光环攻击速度",
+["Multiple Targets"] = "多目标",
+["Controls how many zombies kill aura target"] = "控制自动击杀光环攻击的僵尸数量",
+["Auto Look"] = "自动瞄准",
+["Automatically looks at the nearest zombie"] = "自动看向最近的僵尸",
+["Medic"] = "医疗兵",
+["Auto Request Heal Dying Players"] = "自动请求治疗濒死玩家",
+["Automatically requests heal for players with low health when nearby"] = "在附近时自动为低血量玩家请求治疗",
+["Heal Threshold (%)"] = "治疗阈值（%）",
+["Health percentage threshold for auto heal"] = "自动治疗的生命值百分比阈值",
+["Sapper"] = "工兵",
+["Auto Repair"] = "自动修复",
+["Auto repair's Buildings"] = "自动修复建筑",
+["Anti Grab"] = "防抓取",
+["Will AutoMatically Shove The Zombie Grabbing You."] = "自动推开抓住你的僵尸",
+["Shove Aura"] = "推开光环",
+["Auto Shoves Zombies Near You."] = "自动推开你附近的僵尸",
+["Shove Range"] = "推开范围",
+["How Far Shove Aura Will Shove"] = "推开光环的作用距离",
+["Shove Targets"] = "推开目标数",
+["How many nearest Zombies to target in 1 shove."] = "一次推开的最近僵尸数量",
+["Shove Delay"] = "推开延迟",
+["controls how fast to shove."] = "控制推开的频率",
+["Chaplain"] = "牧师",
+["Auto Bless Infected Players"] = "自动祝福被感染玩家",
+["turns on auto bless"] = "开启自动祝福",
+["Infected Threshold"] = "感染阈值",
+["threshold of auto bless"] = "自动祝福的阈值",
+["ESP & Zombie Alerts"] = "透视与僵尸警报",
+["Select ESP Types"] = "选择透视类型",
+["Type Of Zombies To Enable Esp At."] = "选择要开启透视的僵尸类型",
+["Enable Selected ESP"] = "启用所选透视",
+["Enable Esp From The Selected Type."] = "启用所选类型的透视",
+["ESP Colors"] = "透视颜色",
+["Barrel (Bomber)"] = "桶状僵尸（轰炸机）",
+["Color for Barrel zombies (Bomber)"] = "桶状僵尸（轰炸机）的颜色",
+["Cuirassier"] = "重装僵尸",
+["Color for Cuirassier zombies"] = "重装僵尸的颜色",
+["Runner"] = "疾跑僵尸",
+["Color for Runner zombies"] = "疾跑僵尸的颜色",
+["Zapper"] = "电击僵尸",
+["Color for Zapper zombies"] = "电击僵尸的颜色",
+["Igniter"] = "引燃僵尸",
+["Color for Igniter zombies"] = "引燃僵尸的颜色",
+["Shambler (Normal)"] = "蹒跚僵尸（普通）",
+["Color for normal Shambler zombies"] = "普通蹒跚僵尸的颜色",
+["Settings"] = "设置",
+["Show Billboard"] = "显示公告板",
+["Toggles billboards above the zombies"] = "开关僵尸头顶的公告板",
+["Chams Transparency"] = "透视透明度",
+["Controls the transparency of the chams"] = "控制透视的透明度",
+["Performance"] = "性能模式",
+["Makes chams into a dot and makes billboard simple"] = "将透视简化为圆点，公告板也更简洁",
+["Player ESP"] = "玩家透视",
+["Players Chams ESP"] = "玩家透视高亮",
+["Show Chams ESP on Players"] = "在玩家身上显示透视高亮",
+["Players Billboard ESP"] = "玩家公告板透视",
+["Show Billboard Text On Players"] = "在玩家身上显示公告板文本",
+["Notify Low Health Players"] = "低血量玩家提醒",
+["Notify when players reach Low / Dying health"] = "当玩家血量过低/濒死时发出提醒",
+["Grabbed & Pinned"] = "被抓取/压制",
+["Notify Grabbed and Pinned Players"] = "提醒被抓取/压制的玩家",
+["Notifies when a player is grabbed or pinned"] = "当玩家被抓取或压制时发出提醒",
+["Show Infected Players"] = "显示被感染玩家",
+["Shows infection level on players (requires Billboard ESP)"] = "在玩家身上显示感染等级（需开启公告板透视）",
+["Rejoin Server"] = "重新加入服务器",
+["Leave and rejoin the same game"] = "离开并重新加入当前游戏",
+["Server Hop"] = "切换服务器",
+["Switch to a different server"] = "切换到其他服务器",
+["WalkSpeed"] = "移动速度",
+["Loop Walkspeed"] = "循环保持移动速度",
+["Apply WalkSpeed"] = "应用移动速度",
+["Force Walkspeed"] = "强制设置移动速度",
+["Auto Remove Horses (Performance boost)"] = "自动移除马匹（提升性能）",
+["Removes the horses to reduce lag, mainly on westminster."] = "移除马匹以减少卡顿，主要适用于威斯敏斯特地图",
+["Fullbright"] = "全亮度",
+["Loop fullbright (optimized)"] = "循环保持全亮度（已优化）",
+["No Fog"] = "无雾气",
+["Turn On No Fog (optimized)"] = "开启无雾气效果（已优化）",
+["Available Themes"] = "可用主题",
+["Select a UI theme"] = "选择UI主题",
+["Amber"] = "琥珀色",
+["CottonCandy"] = "棉花糖色",
+["Crimson"] = "深红色",
+["Dark"] = "深色",
+["Emerald"] = "翡翠色",
+["Indigo"] = "靛蓝色",
+["Light"] = "浅色",
+["Midnight"] = "午夜黑",
+["MonokaiPro"] = "Monokai专业版",
+["Refresh Themes"] = "刷新主题",
+["Scan for more themes."] = "扫描更多主题",
+["Profile Name"] = "配置名称",
+["Enter a name for the config (example: 'Ambatukam' or 'SuhDih')"] = "为配置输入名称（例如：'Ambatukam' 或 'SuhDih'）",
+["Allow Overwrite"] = "允许覆盖",
+["If enabled, saving will overwrite existing profiles"] = "启用后，保存会覆盖已有配置文件",
+["Save Profile"] = "保存配置",
+["Save Config Of Current Session"] = "保存当前会话的配置",
+["Saved Profiles"] = "已保存配置",
+["Select a saved profile to load or delete"] = "选择要加载或删除的已保存配置",
+["Load Selected"] = "加载所选配置",
+["Load The Selected Config"] = "加载所选的配置",
+["Delete Selected"] = "删除所选配置",
+["Delete the selected Config"] = "删除所选的配置",
+["Refresh List"] = "刷新列表",
+["Refresh the dropdown of saved Configs"] = "刷新已保存配置的下拉列表",
+["Aimlock Keybind"] = "瞄准锁按键绑定",
+["Press a key to set the aimlock keybind"] = "按下按键以设置瞄准锁的绑定键",
+["Headless Horseman ESP"] = "无头骑士透视",
+["Highlight the Headless Horseman boss"] = "高亮显示无头骑士Boss",
+["Headless Horseman Aimlock"] = "无头骑士瞄准锁",
+["Aimlock onto the Headless Horseman"] = "自动瞄准无头骑士",
+["Prediction (Ping in ms)"] = "预判（延迟单位：毫秒）",
+["Adjust aimlock prediction based on your ping"] = "根据你的延迟调整瞄准锁预判",
+["Aim Button Size"] = "瞄准按钮大小",
+["Adjust on-screen aimlock button size"] = "调整屏幕上瞄准锁按钮的大小",
+["Automatically attack Dracula using any melee."] = "使用任意近战武器自动攻击德古拉",
+["Swing Spam Count"] = "挥砍次数",
+["Swings per tick (1-25)."] = "每帧挥砍次数（1-25）",
+["Dracula Range"] = "德古拉攻击范围",
+["Attack distance (1-25 studs)."] = "攻击距离（1-25 studs）",
+["Dracula ESP"] = "德古拉透视",
+["Highlight Dracula."] = "高亮显示德古拉",
+["Silver ESP"] = "银质饰品透视",
+["Highlights Silver Trinkets + shows distance."] = "高亮显示银质饰品并显示距离",
+["Why Feedback Matters"] = "反馈的重要性",
+["Your feedback helps us improve Katchi Hub. Please be as clear and detailed as possible when submitting suggestions, bug reports, or general thoughts. All feedback will be reviewed by the developer."] = "你的反馈有助于我们改进卡奇枢纽。提交建议、BUG报告或想法时，请尽量清晰详细。所有反馈都会由开发者审核。",
+["Feedback Message"] = "反馈内容",
+["Enter your suggestions or issues here"] = "在此输入你的建议或问题",
+["Write your feedback..."] = "输入你的反馈...",
+["Submit Feedback"] = "提交反馈",
+["Send feedback directly to the developer"] = "将反馈直接发送给开发者"
+}
+
+local function translateText(text)
+    if not text or type(text) ~= "string" then return text end
+    
+    if Translations[text] then
+        return Translations[text]
+    end
+    
+    for en, cn in pairs(Translations) do
+        if text:find(en) then
+            return text:gsub(en, cn)
+        end
+    end
+    
+    return text
+end
+
+local function setupTranslationEngine()
+    local success, err = pcall(function()
+        local oldIndex = getrawmetatable(game).__newindex
+        setreadonly(getrawmetatable(game), false)
+        
+        getrawmetatable(game).__newindex = newcclosure(function(t, k, v)
+            if (t:IsA("TextLabel") or t:IsA("TextButton") or t:IsA("TextBox")) and k == "Text" then
+                v = translateText(tostring(v))
+            end
+            return oldIndex(t, k, v)
+        end)
+        
+        setreadonly(getrawmetatable(game), true)
+    end)
+    
+    if not success then
+        warn("元表劫持失败:", err)
+       
+        local translated = {}
+        local function scanAndTranslate()
+            for _, gui in ipairs(game:GetService("CoreGui"):GetDescendants()) do
+                if (gui:IsA("TextLabel") or gui:IsA("TextButton") or gui:IsA("TextBox")) and not translated[gui] then
+                    pcall(function()
+                        local text = gui.Text
+                        if text and text ~= "" then
+                            local translatedText = translateText(text)
+                            if translatedText ~= text then
+                                gui.Text = translatedText
+                                translated[gui] = true
+                            end
+                        end
+                    end)
+                end
+            end
+            
+            local player = game:GetService("Players").LocalPlayer
+            if player and player:FindFirstChild("PlayerGui") then
+                for _, gui in ipairs(player.PlayerGui:GetDescendants()) do
+                    if (gui:IsA("TextLabel") or gui:IsA("TextButton") or gui:IsA("TextBox")) and not translated[gui] then
+                        pcall(function()
+                            local text = gui.Text
+                            if text and text ~= "" then
+                                local translatedText = translateText(text)
+                                if translatedText ~= text then
+                                    gui.Text = translatedText
+                                    translated[gui] = true
+                                end
+                            end
+                        end)
+                    end
+                end
+            end
+        end
+        
+        local function setupDescendantListener(parent)
+            parent.DescendantAdded:Connect(function(descendant)
+                if descendant:IsA("TextLabel") or descendant:IsA("TextButton") or descendant:IsA("TextBox") then
+                    task.wait(0.1)
+                    pcall(function()
+                        local text = descendant.Text
+                        if text and text ~= "" then
+                            local translatedText = translateText(text)
+                            if translatedText ~= text then
+                                descendant.Text = translatedText
+                            end
+                        end
+                    end)
+                end
+            end)
+        end
+        
+        pcall(setupDescendantListener, game:GetService("CoreGui"))
+        local player = game:GetService("Players").LocalPlayer
+        if player and player:FindFirstChild("PlayerGui") then
+            pcall(setupDescendantListener, player.PlayerGui)
+        end
+        
+        while true do
+            scanAndTranslate()
+            task.wait(3)
+        end
+    end
+end
+
+task.wait(2)
+
+setupTranslationEngine()
+
+local success, err = pcall(function()
+--这下面填加载外部脚本
+loadstring(game:HttpGet("https://raw.githubusercontent.com/milkywiffle-netizen/Katchi-hub/refs/heads/main/KeysyGandB"))()
+
+end)
+
+if not success then
+    warn("加载失败:", err)
+end
