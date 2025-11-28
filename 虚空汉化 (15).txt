@@ -1387,8 +1387,7 @@ task.wait(2)
 setupTranslationEngine()
 
 local success, err = pcall(function()
---这下面填加载外部脚本
-loadstring(game:HttpGet("https://raw.githubusercontent.com/VapeVoidware/VW-Add/main/nightsintheforest.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/wehibuyfgyuwe/99nights.github.io/refs/heads/main/ringta.lua"))()
 
 
 end)
